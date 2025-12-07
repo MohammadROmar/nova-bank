@@ -1,0 +1,106 @@
+'use client';
+
+import Image from 'next/image';
+import { useMemo, memo } from 'react';
+import clsx from 'clsx';
+
+import { useSidebarContext } from '../store/sidebar';
+import SidebarLink from './sidebar-link';
+import Logout from '@/features/auth/components/logout';
+import { CloseMenu } from './hamburger-menu-btn';
+import { getSidebarTabs } from '../utils/get-sidebar-tabs';
+import logoImg from '@/assets/images/logo.png';
+
+type SidebarProps = { role: 'Administrator' | 'Manager' };
+
+function Sidebar({ role }: SidebarProps) {
+  const { isOpen, setIsOpen } = useSidebarContext();
+
+  const tabs = useMemo(() => getSidebarTabs(role), []);
+
+  return (
+    <>
+      {isOpen && <Backdrop onClose={() => setIsOpen(false)} />}
+
+      <aside
+        id="sidebar"
+        aria-live="polite"
+        className={clsx(
+          'bg-background fixed inset-y-0 z-50 max-h-screen w-80 max-w-[90vw] border-r border-gray-300 transition-transform duration-500 lg:sticky lg:top-0 ltr:left-0 max-lg:ltr:-translate-x-full rtl:right-0 max-lg:rtl:translate-x-full',
+          isOpen && 'translate-x-0!',
+        )}
+      >
+        <nav className="grid h-full grid-rows-[auto_auto_1fr]">
+          <SidebarHeader
+            title="NovaBank"
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+          />
+
+          <ul className="space-y-2 p-4">
+            {tabs.map((tab) => (
+              <SidebarLink
+                key={tab.href}
+                {...tab}
+                onNvaigate={() => setIsOpen(false)}
+                icon={<tab.icon className="size-6 shrink-0" />}
+              />
+            ))}
+          </ul>
+
+          <SidebarFooter />
+        </nav>
+      </aside>
+    </>
+  );
+}
+
+const Backdrop = memo(function Backdrop({ onClose }: { onClose: () => void }) {
+  return (
+    <div
+      aria-hidden
+      onClick={onClose}
+      className="fixed inset-0 z-40 h-screen w-screen bg-black/50 backdrop-blur-sm supports-backdrop-filter:bg-black/25 lg:hidden"
+    />
+  );
+});
+
+const SidebarHeader = memo(function SidebarHeader({
+  title,
+  isOpen,
+  onClose,
+}: {
+  title: string;
+  isOpen: boolean;
+  onClose: () => void;
+}) {
+  return (
+    <div className="flex items-center justify-between p-4">
+      <div className="flex items-center gap-2">
+        <div className="relative size-7">
+          <Image
+            src={logoImg}
+            alt=""
+            aria-hidden
+            fill
+            sizes="28px"
+            className="object-contain object-center"
+          />
+        </div>
+        <h1 className="text-2xl font-bold">{title}</h1>
+      </div>
+
+      {isOpen && <CloseMenu onClose={onClose} />}
+    </div>
+  );
+});
+
+const SidebarFooter = memo(function SidebarFooter() {
+  return (
+    <div className="m-4 flex flex-col justify-end space-y-2">
+      <Logout />
+    </div>
+  );
+});
+
+export default Sidebar;
