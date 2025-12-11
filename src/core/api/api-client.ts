@@ -1,5 +1,5 @@
 import { EnvRuntimeError } from '../errors/env-runtime';
-import { HttpsError } from '../errors/http';
+import { HttpError } from '../errors/http';
 import { ServerError } from '../errors/server';
 import { UnauthorizedError } from '../errors/unauthorized';
 
@@ -32,7 +32,7 @@ export class ApiClient {
       if (response.status === 401) {
         throw new UnauthorizedError();
       } else if (!response.ok) {
-        throw new HttpsError('Failed to fetch data', response.status);
+        throw new HttpError('Failed to fetch data', response.status);
       }
 
       return await response.json();

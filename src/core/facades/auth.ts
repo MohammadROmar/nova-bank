@@ -34,7 +34,7 @@ export class AuthFacade {
   public static getCurrentUser(token: string) {
     const api = ApiClient.instance;
 
-    return api.request<User>('/api/users/current', {
+    return api.request<User>('/api/users/GetCurrentUser', {
       headers: { Authorization: `Bearer ${token}` },
     });
   }

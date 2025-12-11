@@ -1,6 +1,6 @@
 'use server';
 
-import { HttpsError } from '@/core/errors/http';
+import { HttpError } from '@/core/errors/http';
 import { ValidationError } from '@/core/errors/validation';
 import { buildRegisterManagerChain } from '@/core/chain/register-manager';
 
@@ -41,7 +41,7 @@ export async function registerManagerAction(
 
     if (err instanceof ValidationError) {
       errorMessage = err.message;
-    } else if (err instanceof HttpsError) {
+    } else if (err instanceof HttpError) {
       errorMessage = 'Failed to register manager';
     }
 

@@ -9,7 +9,7 @@ export default function Breadcrumbs() {
   const segments = pathname.split('/').filter(Boolean);
 
   return (
-    <ol className="text-secondary flex flex-wrap text-sm">
+    <ol className="flex flex-wrap text-sm text-gray-600">
       {segments.map((segment, i) => {
         const isLast = i === segments.length - 1;
 
@@ -21,7 +21,7 @@ export default function Breadcrumbs() {
               href={href}
               className="capitalize underline underline-offset-2"
             >
-              {segment}
+              {segment.replace('-', ' ')}
             </Link>
             {!isLast && (
               <span aria-hidden className="px-3 sm:px-4">

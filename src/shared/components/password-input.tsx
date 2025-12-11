@@ -50,7 +50,7 @@ function PasswordRules({ password }: { password: string }) {
   }, [password]);
 
   return (
-    <ul className="text-secondary grid grid-cols-1 gap-x-4 gap-y-2 text-sm md:grid-cols-2">
+    <ul className="grid grid-cols-1 gap-x-4 gap-y-2 text-sm text-gray-600 md:grid-cols-2">
       {results.map(({ key, passed, label }) => (
         <li key={key} className="flex items-center gap-2">
           <span

@@ -2,8 +2,8 @@ import { Toaster } from 'sonner';
 import type { PropsWithChildren } from 'react';
 
 import SidebarContextProvider from '@/shared/store/sidebar';
-import Sidebar from '@/shared/components/sidebar';
-import Header from '@/shared/components/header';
+import Sidebar from '@/features/dashboard/components/sidebar';
+import Header from '@/features/dashboard/components/header';
 import RefreshTokens from '@/features/auth/components/refresh-tokens';
 
 type AuthLayoutProps = {
@@ -19,7 +19,7 @@ function AuthLayout({ role, children }: AuthLayoutProps) {
         <Sidebar role={role} />
         <div className="grid size-full grid-rows-[auto_1fr]">
           <Header />
-          <main className="m-auto grid size-full max-w-5xl overflow-auto p-4 lg:p-8">
+          <main className="m-auto grid size-full max-w-6xl overflow-auto p-4 lg:p-8">
             {children}
           </main>
         </div>

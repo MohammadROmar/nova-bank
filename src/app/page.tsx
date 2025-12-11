@@ -17,10 +17,11 @@ function HomePage() {
                 aria-hidden
                 fill
                 sizes="28px"
+                priority
                 className="object-contain object-center"
               />
             </div>
-            <h1 className="text-2xl font-bold">NovaBank</h1>
+            <h1 className="text-2xl font-black tracking-tighter">NovaBank</h1>
           </div>
 
           <div>

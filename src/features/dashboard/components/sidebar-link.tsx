@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import type { ReactNode } from 'react';
+import { isActiveTab } from '../utils/is-active-tab';
 
 type SidebarLinkProps = {
   label: string;
@@ -15,7 +16,7 @@ type SidebarLinkProps = {
 function SidebarLink({ label, href, icon, onNvaigate }: SidebarLinkProps) {
   const pathname = usePathname();
 
-  const isActive = pathname === href;
+  const isActive = isActiveTab(pathname, href);
 
   return (
     <li>

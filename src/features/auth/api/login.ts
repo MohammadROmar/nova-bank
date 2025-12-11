@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation';
 import { AuthFacade } from '@/core/facades/auth';
 import { ValidationError } from '@/core/errors/validation';
 import { UnauthorizedError } from '@/core/errors/unauthorized';
-import { HttpsError } from '@/core/errors/http';
+import { HttpError } from '@/core/errors/http';
 
 type LoginInputs = { email: string; password: string };
 type LoginActionState = LoginInputs &
@@ -53,7 +53,7 @@ export async function loginAction(
       errorMessage = 'Invalid email or password.';
     } else if (error instanceof UnauthorizedError) {
       errorMessage = 'Unauthorized - check credentials.';
-    } else if (error instanceof HttpsError && error.status === 500) {
+    } else if (error instanceof HttpError && error.status === 500) {
       errorMessage = 'Server error. Please try again later.';
     }
 

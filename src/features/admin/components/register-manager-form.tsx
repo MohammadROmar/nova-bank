@@ -19,7 +19,7 @@ export default function RegisterManagerForm() {
       toast.success('Manager Registered Successfully', {
         classNames: {
           title: 'text-heading!',
-          toast: 'bg-secondary-background! rounded-2xl! border-gray-300!',
+          toast: 'bg-white! rounded-2xl! border-gray-300!',
           icon: 'text-success',
         },
       });
@@ -29,7 +29,7 @@ export default function RegisterManagerForm() {
   return (
     <form
       action={formAction}
-      className="lg:bg-background mt-8 space-y-6 border-gray-300 max-lg:flex max-lg:flex-col max-lg:justify-between lg:h-fit lg:rounded-2xl lg:border lg:p-4"
+      className="mt-8 space-y-6 border-gray-300 max-lg:flex max-lg:flex-col max-lg:justify-between lg:h-fit lg:rounded-2xl lg:border lg:bg-white lg:p-4"
     >
       <div className="space-y-6">
         <div className="flex w-full flex-col gap-6 lg:flex-row">
@@ -39,7 +39,7 @@ export default function RegisterManagerForm() {
             autoComplete="username"
             placeholder="Enter a unique username"
             defaultValue={state.values?.username}
-            className="lg:bg-white"
+            // className="lg:bg-white"
           />
           <Input
             id="phoneNumber"
@@ -47,7 +47,7 @@ export default function RegisterManagerForm() {
             autoComplete="tel"
             placeholder="Enter phone number"
             defaultValue={state.values?.phoneNumber}
-            className="lg:bg-white"
+            // className="lg:bg-white"
           />
         </div>
         <Input
@@ -57,13 +57,13 @@ export default function RegisterManagerForm() {
           type="email"
           placeholder="Enter a unique email"
           defaultValue={state.values?.email}
-          className="lg:bg-white"
+          // className="lg:bg-white"
         />
         <PasswordInput
           label="Password"
           placeholder="Enter a secure password"
           defaultValue={state.values?.password}
-          className="lg:bg-white"
+          // className="lg:bg-white"
         />
       </div>
 

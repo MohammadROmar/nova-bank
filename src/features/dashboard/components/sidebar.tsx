@@ -1,13 +1,14 @@
 'use client';
 
+import Link from 'next/link';
 import Image from 'next/image';
 import { useMemo, memo } from 'react';
 import clsx from 'clsx';
 
-import { useSidebarContext } from '../store/sidebar';
+import { useSidebarContext } from '../../../shared/store/sidebar';
 import SidebarLink from './sidebar-link';
 import Logout from '@/features/auth/components/logout';
-import { CloseMenu } from './hamburger-menu-btn';
+import { CloseMenu } from '../../../shared/components/hamburger-menu-btn';
 import { getSidebarTabs } from '../utils/get-sidebar-tabs';
 import logoImg from '@/assets/images/logo.png';
 
@@ -26,7 +27,7 @@ function Sidebar({ role }: SidebarProps) {
         id="sidebar"
         aria-live="polite"
         className={clsx(
-          'bg-background fixed inset-y-0 z-50 max-h-screen w-80 max-w-[90vw] border-r border-gray-300 transition-transform duration-500 lg:sticky lg:top-0 ltr:left-0 max-lg:ltr:-translate-x-full rtl:right-0 max-lg:rtl:translate-x-full',
+          'fixed inset-y-0 z-50 max-h-screen w-80 max-w-[90vw] border-r border-gray-300 bg-white transition-transform duration-500 lg:sticky lg:top-0 ltr:left-0 max-lg:ltr:-translate-x-full rtl:right-0 max-lg:rtl:translate-x-full',
           isOpen && 'translate-x-0!',
         )}
       >
@@ -76,7 +77,7 @@ const SidebarHeader = memo(function SidebarHeader({
 }) {
   return (
     <div className="flex items-center justify-between p-4">
-      <div className="flex items-center gap-2">
+      <Link href="/dashboard" className="flex items-center gap-2">
         <div className="relative size-7">
           <Image
             src={logoImg}
@@ -84,11 +85,12 @@ const SidebarHeader = memo(function SidebarHeader({
             aria-hidden
             fill
             sizes="28px"
+            priority
             className="object-contain object-center"
           />
         </div>
-        <h1 className="text-2xl font-bold">{title}</h1>
-      </div>
+        <h1 className="text-2xl font-black tracking-tighter">{title}</h1>
+      </Link>
 
       {isOpen && <CloseMenu onClose={onClose} />}
     </div>
