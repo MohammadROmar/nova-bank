@@ -22,16 +22,16 @@ abstract class BaseHandler {
 
 class RegisterValidationHandler extends BaseHandler {
   async handle(req: {
-    username: string;
+    userName: string;
     email: string;
     password: string;
     phoneNumber: string;
   }) {
-    if (!req.username || !req.email || !req.password || !req.phoneNumber) {
+    if (!req.userName || !req.email || !req.password || !req.phoneNumber) {
       throw new ValidationError('All fields are required');
     }
 
-    const usernameErr = validateText(req.username);
+    const usernameErr = validateText(req.userName);
     if (usernameErr) throw new ValidationError(usernameErr);
 
     const emailErr = validateEmail(req.email);
@@ -49,26 +49,32 @@ class RegisterValidationHandler extends BaseHandler {
 
 class RegisterManagerBackendHandler extends BaseHandler {
   async handle(req: {
-    username: string;
+    userName: string;
     email: string;
     password: string;
-    phone: string;
+    phoneNumber: string;
   }) {
-    const token = (await cookies()).get('token');
+    const token = (await cookies()).get('token')?.value;
 
     if (!token) {
       throw new UnauthorizedError();
     }
 
+    const formData = new FormData();
+    formData.append('userName', req.userName);
+    formData.append('email', req.email);
+    formData.append('password', req.password);
+    formData.append('phoneNumber', req.phoneNumber);
+    formData.append('role', 'Manager');
+
     const api = ApiClient.instance;
-    return api.request('/users/register', {
+    const response = await api.request('/api/users/register', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ ...req, role: 'Manager' }),
+      headers: { Authorization: `Bearer ${token}` },
+      body: formData,
     });
+
+    return response;
   }
 }
 

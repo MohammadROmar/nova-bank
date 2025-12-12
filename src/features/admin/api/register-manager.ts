@@ -5,7 +5,7 @@ import { ValidationError } from '@/core/errors/validation';
 import { buildRegisterManagerChain } from '@/core/chain/register-manager';
 
 type RegisterManagerInputs = {
-  username: string;
+  userName: string;
   email: string;
   password: string;
   phoneNumber: string;
@@ -19,12 +19,17 @@ export async function registerManagerAction(
   prevState: RegisterManagerActionState,
   formData: FormData,
 ): Promise<RegisterManagerActionState> {
-  const username = formData.get('username')?.toString() || '';
+  const userName = formData.get('username')?.toString() || '';
   const email = formData.get('email')?.toString() || '';
   const password = formData.get('password')?.toString() || '';
-  const phoneNumber = formData.get('phone')?.toString() || '';
+  const phoneNumber = formData.get('phoneNumber')?.toString() || '';
 
-  const managerCredentials = { username, email, password, phoneNumber };
+  const managerCredentials = {
+    userName,
+    email,
+    password,
+    phoneNumber,
+  };
 
   const chain = buildRegisterManagerChain();
 
@@ -33,7 +38,6 @@ export async function registerManagerAction(
     return {
       id: Date.now().toString(),
       success: true,
-      values: managerCredentials,
     };
   } catch (err) {
     let errorMessage =

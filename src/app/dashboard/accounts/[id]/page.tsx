@@ -2,10 +2,10 @@ import { cookies } from 'next/headers';
 
 import PageTitle from '@/features/dashboard/components/page-title';
 import Detail from '@/features/accounts/components/detail';
+import AccountCard from '@/features/accounts/components/account-card';
 import { ApiClient } from '@/core/api/api-client';
 import { Account } from '@/features/accounts/models/accounts';
 import { getAccountDetails } from '@/features/accounts/utils/get-account-details';
-import AccountCard from '@/features/accounts/components/account-card';
 
 type Props = { params: Promise<{ id: string }> };
 

@@ -20,11 +20,11 @@ export default function RegisterManagerForm() {
         classNames: {
           title: 'text-heading!',
           toast: 'bg-white! rounded-2xl! border-gray-300!',
-          icon: 'text-success',
+          icon: 'text-green-500!',
         },
       });
     }
-  }, [state.id]);
+  }, [state.id, state.success]);
 
   return (
     <form
@@ -38,8 +38,8 @@ export default function RegisterManagerForm() {
             label="Username"
             autoComplete="username"
             placeholder="Enter a unique username"
-            defaultValue={state.values?.username}
-            // className="lg:bg-white"
+            defaultValue={state.values?.userName}
+            className="lg:bg-background!"
           />
           <Input
             id="phoneNumber"
@@ -47,7 +47,7 @@ export default function RegisterManagerForm() {
             autoComplete="tel"
             placeholder="Enter phone number"
             defaultValue={state.values?.phoneNumber}
-            // className="lg:bg-white"
+            className="lg:bg-background!"
           />
         </div>
         <Input
@@ -57,13 +57,13 @@ export default function RegisterManagerForm() {
           type="email"
           placeholder="Enter a unique email"
           defaultValue={state.values?.email}
-          // className="lg:bg-white"
+          className="lg:bg-background!"
         />
         <PasswordInput
           label="Password"
           placeholder="Enter a secure password"
           defaultValue={state.values?.password}
-          // className="lg:bg-white"
+          className="lg:bg-background!"
         />
       </div>
 
@@ -72,7 +72,7 @@ export default function RegisterManagerForm() {
           <button
             disabled={pending}
             type="reset"
-            className="button bg-none font-normal text-current max-lg:w-full"
+            className="button bg-transparent! font-normal text-current! max-lg:w-full"
           >
             Reset
           </button>
@@ -84,6 +84,9 @@ export default function RegisterManagerForm() {
           </Button>
         </div>
       </div>
+      {state.success === false && (
+        <p className="text-sm text-red-500">{state.error}</p>
+      )}
     </form>
   );
 }

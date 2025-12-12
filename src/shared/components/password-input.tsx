@@ -65,7 +65,7 @@ function PasswordRules({ password }: { password: string }) {
               <XIcon className="size-1.5" />
             )}
           </span>
-          <span className={passed ? 'text-success' : undefined}>{label}</span>
+          <span className={passed ? 'text-green-500' : undefined}>{label}</span>
         </li>
       ))}
     </ul>

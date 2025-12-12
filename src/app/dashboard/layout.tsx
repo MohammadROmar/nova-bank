@@ -21,9 +21,7 @@ async function DashboardLayout({ children }: PropsWithChildren) {
     if (token) {
       user = await AuthFacade.getCurrentUser(token);
     }
-  } catch (e) {
-    console.log(e);
-  }
+  } catch {}
 
   return (
     <>
