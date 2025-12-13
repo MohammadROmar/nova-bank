@@ -1,6 +1,6 @@
 import { memo, type ComponentPropsWithoutRef } from 'react';
 
-function CloseIcon(props: ComponentPropsWithoutRef<'svg'>) {
+function LockIcon(props: ComponentPropsWithoutRef<'svg'>) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -20,4 +20,4 @@ function CloseIcon(props: ComponentPropsWithoutRef<'svg'>) {
   );
 }
 
-export default memo(CloseIcon);
+export default memo(LockIcon);

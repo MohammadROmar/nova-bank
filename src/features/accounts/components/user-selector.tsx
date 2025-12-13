@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AsyncPaginate } from 'react-select-async-paginate';
 
 import { loadUsers } from '../api/load-users';

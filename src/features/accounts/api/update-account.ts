@@ -1,12 +1,12 @@
 'use server';
 
 import { cookies } from 'next/headers';
+import { revalidatePath } from 'next/cache';
 
 import { ApiClient } from '@/core/api/api-client';
 import { UnauthorizedError } from '@/core/errors/unauthorized';
 import { ValidationError } from '@/core/errors/validation';
 import { ServerError } from '@/core/errors/server';
-import { revalidatePath } from 'next/cache';
 
 type UpdateAccountActionState = { id?: string } & (
   | { success?: true }
@@ -31,10 +31,7 @@ export async function updateAccountAction(
 
   try {
     const token = (await cookies()).get('token')?.value;
-
-    if (!token) {
-      throw new UnauthorizedError();
-    }
+    if (!token) throw new UnauthorizedError();
 
     const api = ApiClient.instance;
     api.request(`/api/Accounts/${accountId}/Update`, {
@@ -50,7 +47,7 @@ export async function updateAccountAction(
     return { id: Date.now().toString(), success: true };
   } catch (err) {
     let error =
-      'An error occured while updating account. Please try again later.';
+      'An error occured while updating the account. Please try again later.';
 
     if (err instanceof ValidationError) {
       error = 'Please check your inputs and try again.';

@@ -1,12 +1,12 @@
 'use client';
 
-import { useActionState, useEffect } from 'react';
-import { toast } from 'sonner';
+import { useActionState } from 'react';
 
+import { useSuccessToast } from '@/features/dashboard/hooks/use-success-toast';
 import Input from '@/shared/components/input';
 import PasswordInput from '@/shared/components/password-input';
-import { registerManagerAction } from '../api/register-manager';
 import FormActions from '@/features/dashboard/components/form-actions';
+import { registerManagerAction } from '../api/register-manager';
 
 export default function RegisterManagerForm() {
   const [state, formAction, pending] = useActionState(
@@ -14,16 +14,10 @@ export default function RegisterManagerForm() {
     {},
   );
 
-  useEffect(() => {
-    if (state.success) {
-      toast.success('Manager Registered Successfully', {
-        classNames: {
-          toast: 'bg-white! rounded-2xl! border-gray-200!',
-          icon: 'text-green-500!',
-        },
-      });
-    }
-  }, [state.id, state.success]);
+  useSuccessToast('Manager Registered Successfully', state.success, [
+    state.id,
+    state.success,
+  ]);
 
   return (
     <form
@@ -59,6 +53,8 @@ export default function RegisterManagerForm() {
           className="lg:bg-background!"
         />
         <PasswordInput
+          actionResultId={state.id}
+          success={state.success}
           label="Password"
           placeholder="Enter a secure password"
           defaultValue={state.values?.password}

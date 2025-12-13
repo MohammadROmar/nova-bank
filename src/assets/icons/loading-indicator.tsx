@@ -1,6 +1,6 @@
 import { memo, type ComponentPropsWithoutRef } from 'react';
 
-function LoadingINdicator(props: ComponentPropsWithoutRef<'svg'>) {
+function LoadingIndicator(props: ComponentPropsWithoutRef<'svg'>) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" {...props}>
       <circle
@@ -61,4 +61,4 @@ function LoadingINdicator(props: ComponentPropsWithoutRef<'svg'>) {
   );
 }
 
-export default memo(LoadingINdicator);
+export default memo(LoadingIndicator);

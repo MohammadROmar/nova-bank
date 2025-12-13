@@ -46,18 +46,18 @@ export async function loginAction(
       path: '/',
       maxAge: 60 * 60 * 24 * 2,
     });
-  } catch (error) {
-    let errorMessage =
+  } catch (err) {
+    let error =
       'Unexpected error has occured. Please check your input and internet or try again later.';
-    if (error instanceof ValidationError) {
-      errorMessage = 'Invalid email or password.';
-    } else if (error instanceof UnauthorizedError) {
-      errorMessage = 'Unauthorized - check credentials.';
-    } else if (error instanceof HttpError && error.status === 500) {
-      errorMessage = 'Server error. Please try again later.';
+    if (err instanceof ValidationError) {
+      error = 'Invalid email or password.';
+    } else if (err instanceof UnauthorizedError) {
+      error = 'Unauthorized - check credentials.';
+    } else if (err instanceof HttpError && err.status === 500) {
+      error = 'Server error. Please try again later.';
     }
 
-    return { success: false, error: errorMessage, email, password };
+    return { success: false, error, email, password };
   }
 
   redirect('/dashboard');

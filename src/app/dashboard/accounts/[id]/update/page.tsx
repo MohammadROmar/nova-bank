@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import PageTitle from '@/features/dashboard/components/page-title';
 import UpdateAccountForm from '@/features/accounts/components/update-account-form';
+import ChangeAccountState from '@/features/accounts/components/change-account-state';
 import { getAccount } from '@/features/accounts/api/get-accounts';
 import { Account } from '@/features/accounts/models/accounts';
 
@@ -33,6 +34,7 @@ async function UpdateAccountPage({ params }: Props) {
       </div>
 
       <UpdateAccountForm account={account} parentAccount={parentAccount} />
+      <ChangeAccountState id={account.id} defaultState={account.state} />
     </section>
   );
 }

@@ -55,10 +55,7 @@ class RegisterManagerBackendHandler extends BaseHandler {
     phoneNumber: string;
   }) {
     const token = (await cookies()).get('token')?.value;
-
-    if (!token) {
-      throw new UnauthorizedError();
-    }
+    if (!token) throw new UnauthorizedError();
 
     const formData = new FormData();
     formData.append('userName', req.userName);

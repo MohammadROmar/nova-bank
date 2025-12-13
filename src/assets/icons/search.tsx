@@ -1,6 +1,6 @@
 import { memo, type ComponentPropsWithoutRef } from 'react';
 
-function AddUserIcon(props: ComponentPropsWithoutRef<'svg'>) {
+function SearchIcon(props: ComponentPropsWithoutRef<'svg'>) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -20,4 +20,4 @@ function AddUserIcon(props: ComponentPropsWithoutRef<'svg'>) {
   );
 }
 
-export default memo(AddUserIcon);
+export default memo(SearchIcon);

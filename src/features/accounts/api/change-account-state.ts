@@ -1,48 +1,46 @@
 'use server';
 
 import { cookies } from 'next/headers';
+import { revalidatePath } from 'next/cache';
 
 import { ApiClient } from '@/core/api/api-client';
 import { UnauthorizedError } from '@/core/errors/unauthorized';
 import { ValidationError } from '@/core/errors/validation';
 import { ServerError } from '@/core/errors/server';
 
-type CreateAccountActionState = { id?: string } & (
+type ChangeAccountState = { id?: string } & (
   | { success?: true }
   | { success?: false; error?: string }
 );
 
-export async function createAccountAction(
-  _: CreateAccountActionState,
+export async function changeAccountState(
+  accountId: number,
+  _: ChangeAccountState,
   formData: FormData,
-): Promise<CreateAccountActionState> {
-  const userId = formData.get('userId')?.toString() ?? '';
-  const parentId = formData.get('parentId')?.toString();
-  const type = formData.get('accountType')?.toString() ?? '';
+): Promise<ChangeAccountState> {
+  const newState = formData.get('accountState')?.toString() ?? '';
 
-  if (userId.trim().length === 0 || type.trim().length === 0)
-    throw new ValidationError();
-
-  const parentAccountId = parentId?.trim().length === 0 ? null : parentId;
+  if (newState.trim().length === 0) throw new ValidationError();
 
   try {
     const token = (await cookies()).get('token')?.value;
     if (!token) throw new UnauthorizedError();
 
     const api = ApiClient.instance;
-    api.request('/api/Accounts', {
-      method: 'POST',
+    api.request(`/api/Accounts/${accountId}/ChangeState`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ userId, parentAccountId, type }),
+      body: JSON.stringify({ newState }),
     });
 
+    revalidatePath(`dashboard/accounts/${accountId}/update`);
     return { id: Date.now().toString(), success: true };
   } catch (err) {
     let error =
-      'An error occured while creating new account. Please try again later.';
+      'An error occured while changing the state. Please try again later.';
 
     if (err instanceof ValidationError) {
       error = 'Please check your inputs and try again.';

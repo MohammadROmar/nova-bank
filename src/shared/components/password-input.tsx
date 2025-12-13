@@ -10,18 +10,18 @@ import { REQUIREMENTS } from '../data/password-req';
 
 type InputProps = {
   success?: boolean;
-  id?: string;
+  actionResultId?: string;
   label: string;
 } & ComponentProps<'input'>;
 
-function PasswordInput(props: InputProps) {
+function PasswordInput({ actionResultId, success, ...props }: InputProps) {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    if (props.success) {
+    if (success) {
       setPassword('');
     }
-  }, [props.id, props.success]);
+  }, [actionResultId, success]);
 
   return (
     <div className="space-y-2">

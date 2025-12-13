@@ -1,6 +1,6 @@
 import { memo, type ComponentPropsWithoutRef } from 'react';
 
-function UserIcon(props: ComponentPropsWithoutRef<'svg'>) {
+function AddWalletIcon(props: ComponentPropsWithoutRef<'svg'>) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -20,4 +20,4 @@ function UserIcon(props: ComponentPropsWithoutRef<'svg'>) {
   );
 }
 
-export default memo(UserIcon);
+export default memo(AddWalletIcon);

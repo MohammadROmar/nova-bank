@@ -12,7 +12,6 @@ export const dynamic = 'force-dynamic';
 
 async function DashboardLayout({ children }: PropsWithChildren) {
   const token = (await cookies()).get('token')?.value;
-
   if (!token) return notFound();
 
   let user: User | null = null;

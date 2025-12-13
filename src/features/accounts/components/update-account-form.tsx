@@ -1,14 +1,14 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useActionState, useEffect } from 'react';
-import { toast } from 'sonner';
+import { useActionState } from 'react';
 
+import { useSuccessToast } from '@/features/dashboard/hooks/use-success-toast';
 import AccountTypeSelector from './account-type-selector';
 import SelectorSkeleton from './selector-skeleton';
 import FormActions from '@/features/dashboard/components/form-actions';
-import { Account } from '../models/accounts';
 import { updateAccountAction } from '../api/update-account';
+import { Account } from '../models/accounts';
 
 const ParentAccountSelector = dynamic(
   () => import('./parent-account-selector'),
@@ -24,16 +24,10 @@ function UpdateAccountForm({ account, parentAccount }: Props) {
   const action = updateAccountAction.bind(null, account.id.toString());
   const [state, formAction, pending] = useActionState(action, {});
 
-  useEffect(() => {
-    if (state.success) {
-      toast.success('Account Updated Successfully', {
-        classNames: {
-          toast: 'bg-white! rounded-2xl! border-gray-200!',
-          icon: 'text-green-500',
-        },
-      });
-    }
-  }, [state.id, state.success]);
+  useSuccessToast('Account Updated Successfully', state.success, [
+    state.id,
+    state.success,
+  ]);
 
   return (
     <form

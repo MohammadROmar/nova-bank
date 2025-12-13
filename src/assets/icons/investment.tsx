@@ -3,21 +3,13 @@ import { memo, type ComponentPropsWithoutRef } from 'react';
 function InvestmentIcon(props: ComponentPropsWithoutRef<'svg'>) {
   return (
     <svg
-      viewBox="0 0 76 76"
+      viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
-      baseProfile="full"
-      enableBackground="new 0 0 76.00 76.00"
-      xmlSpace="preserve"
       aria-hidden
       {...props}
     >
-      <path
-        fill="currentColor"
-        strokeWidth="0.2"
-        strokeLinejoin="round"
-        d="M 58.5833,20.5833L 58.5833,30.0833L 55.4167,26.9167L 41.6074,39.9229L 34.3926,32.2315L 30.573,44.1959L 27.1778,40.7775L 19,49.0833L 19,25.3333L 45.9167,25.3333L 45.9167,30.0833L 52.25,23.75L 49.0833,20.5833L 58.5833,20.5833 Z M 17.4167,55.4167L 27.1778,45.0505L 31.4218,49.3234L 35.2414,37.3591L 41.6074,44.1959L 49.0833,36.4167L 49.0833,55.4167L 17.4167,55.4167 Z "
-      />
+      <path fill="none" d="M0 0h24v24H0z" />
+      <path d="M4 5v14h16V5H4zM3 3h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm11.793 6.793L13 8h5v5l-1.793-1.793-3.864 3.864-2.121-2.121-2.829 2.828-1.414-1.414 4.243-4.243 2.121 2.122 2.45-2.45z" />
     </svg>
   );
 }

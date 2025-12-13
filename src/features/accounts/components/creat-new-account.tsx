@@ -1,9 +1,9 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useActionState, useEffect, useState } from 'react';
-import { toast } from 'sonner';
+import { useActionState, useState } from 'react';
 
+import { useSuccessToast } from '@/features/dashboard/hooks/use-success-toast';
 import SelectorSkeleton from './selector-skeleton';
 import AccountTypeSelector from './account-type-selector';
 import FormActions from '@/features/dashboard/components/form-actions';
@@ -25,16 +25,10 @@ export default function CreateNewAccount() {
   const [state, formAction, pending] = useActionState(createAccountAction, {});
   const [username, setUsername] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (state.success) {
-      toast.success('Account Created Successfully', {
-        classNames: {
-          toast: 'bg-white! rounded-2xl! border-gray-200!',
-          icon: 'text-green-500',
-        },
-      });
-    }
-  }, [state.id, state.success]);
+  useSuccessToast('Account Created Successfully', state.success, [
+    state.id,
+    state.success,
+  ]);
 
   return (
     <form
