@@ -1,13 +1,13 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useActionState, useEffect } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
-import Button from '@/shared/components/button';
 import SelectorSkeleton from './selector-skeleton';
-import { createAccountAction } from '../api/create-account';
 import AccountTypeSelector from './account-type-selector';
+import FormActions from '@/features/dashboard/components/form-actions';
+import { createAccountAction } from '../api/create-account';
 
 const UserSelector = dynamic(() => import('./user-selector'), {
   ssr: false,
@@ -23,13 +23,13 @@ const ParentAccountSelector = dynamic(
 
 export default function CreateNewAccount() {
   const [state, formAction, pending] = useActionState(createAccountAction, {});
+  const [username, setUsername] = useState<string | null>(null);
 
   useEffect(() => {
     if (state.success) {
       toast.success('Account Created Successfully', {
         classNames: {
-          title: 'text-heading!',
-          toast: 'bg-white! rounded-2xl! border-gray-300!',
+          toast: 'bg-white! rounded-2xl! border-gray-200!',
           icon: 'text-green-500',
         },
       });
@@ -41,8 +41,12 @@ export default function CreateNewAccount() {
       action={formAction}
       className="space-y-6 rounded-2xl border border-gray-200 bg-white p-4 shadow"
     >
-      <UserSelector disabled={pending} />
-      <ParentAccountSelector id={state.id} disabled={pending} />
+      <UserSelector disabled={pending} changeUsername={setUsername} />
+      <ParentAccountSelector
+        id={state.id}
+        username={username}
+        disabled={pending}
+      />
       <AccountTypeSelector disabled={pending} />
       <Actions pending={pending} />
 
@@ -60,23 +64,7 @@ function Actions({ pending }: { pending: boolean }) {
         <span className="text-yellow-500">Note: </span>Fields marked{' '}
         <span className="text-red-500">*</span> are required.
       </p>
-      <div className="flex justify-end">
-        <div className="flex items-center gap-2 max-lg:w-full max-lg:flex-col-reverse">
-          <button
-            disabled={pending}
-            type="reset"
-            className="button bg-transparent! font-normal text-current! max-lg:w-full"
-          >
-            Reset
-          </button>
-          <Button
-            pending={pending}
-            className="flex items-center justify-center max-lg:w-full"
-          >
-            Create
-          </Button>
-        </div>
-      </div>
+      <FormActions label="Create" disabled={pending} />
     </>
   );
 }

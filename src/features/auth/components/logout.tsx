@@ -42,7 +42,7 @@ export default function Logout() {
             type="button"
             onClick={() => setIsOpen(false)}
             disabled={pending}
-            className="button border border-gray-300 bg-transparent font-normal text-current!"
+            className="button border-gray-w00 border bg-transparent font-normal text-current!"
           >
             Cancel
           </button>

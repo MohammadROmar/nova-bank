@@ -42,7 +42,7 @@ export default function Pagination({
   }
 
   return (
-    <nav className="flex w-fit items-center overflow-hidden rounded-2xl border border-gray-300 bg-white">
+    <nav className="flex w-fit items-center overflow-hidden rounded-2xl border border-gray-200 bg-white">
       <button
         onClick={() => {
           const prev = Math.max(1, currentPage - 1);
@@ -51,7 +51,7 @@ export default function Pagination({
         }}
         disabled={currentPage === 1}
         aria-disabled={currentPage === 1}
-        className="size-full cursor-pointer border-gray-300 p-2 disabled:cursor-not-allowed disabled:text-current/50 ltr:border-r rtl:border-l"
+        className="size-full cursor-pointer border-gray-200 p-2 disabled:cursor-not-allowed disabled:text-current/50 ltr:border-r rtl:border-l"
       >
         <ArrowLeftIcon className="size-4 rtl:rotate-180" />
       </button>
@@ -61,7 +61,7 @@ export default function Pagination({
           return (
             <span
               key={`ellipsis-${idx}`}
-              className="pointer-events-none border-gray-300 p-2 select-none ltr:border-r rtl:border-l"
+              className="pointer-events-none border-gray-200 p-2 select-none ltr:border-r rtl:border-l"
             >
               …
             </span>

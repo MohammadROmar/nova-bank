@@ -1,6 +1,12 @@
 import { accountTypes } from '../data/account-types';
+import { Account } from '../models/accounts';
 
-function AccountTypeSelector({ disabled }: { disabled: boolean }) {
+type Props = { defaultType?: Account['type']; disabled: boolean };
+
+function AccountTypeSelector({ defaultType, disabled }: Props) {
+  const selectedType =
+    accountTypes.find((account) => account.name === defaultType)?.id ?? 0;
+
   return (
     <div className="flex flex-col gap-2">
       <label>
@@ -12,7 +18,7 @@ function AccountTypeSelector({ disabled }: { disabled: boolean }) {
             <input
               type="radio"
               name="accountType"
-              defaultChecked={i === 0}
+              defaultChecked={selectedType === id}
               disabled={disabled}
               value={id}
               className="peer sr-only"

@@ -18,7 +18,7 @@ export type DetailProps = {
 
 export function getAccountDetails(account: Account): DetailProps[] {
   return [
-    { icon: idIcon, label: 'User ID', value: account.userId },
+    { icon: idIcon, label: 'Account ID', value: account.id },
     { icon: user, label: 'Account Holder', value: account.userName },
     {
       icon: idIcon,

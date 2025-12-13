@@ -6,7 +6,7 @@ import logoImg from '@/assets/images/logo.png';
 
 async function Header() {
   return (
-    <header className="flex w-full items-center justify-between border-b border-gray-300 bg-white px-4 lg:hidden">
+    <header className="flex w-full items-center justify-between border-b border-gray-200 bg-white px-4 lg:hidden">
       <Link
         href="/dashboard"
         className="flex h-min items-center gap-2 p-4 lg:opacity-0 lg:select-none"

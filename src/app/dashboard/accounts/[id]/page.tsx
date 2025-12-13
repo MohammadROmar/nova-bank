@@ -1,28 +1,28 @@
-import { cookies } from 'next/headers';
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 import PageTitle from '@/features/dashboard/components/page-title';
 import Detail from '@/features/accounts/components/detail';
+import AccountActions from '@/features/accounts/components/account-actions';
 import AccountCard from '@/features/accounts/components/account-card';
-import { ApiClient } from '@/core/api/api-client';
-import { Account } from '@/features/accounts/models/accounts';
+import { getAccount } from '@/features/accounts/api/get-accounts';
 import { getAccountDetails } from '@/features/accounts/utils/get-account-details';
+import { Account } from '@/features/accounts/models/accounts';
+
+export const metadata: Metadata = { title: 'Account Details' };
 
 type Props = { params: Promise<{ id: string }> };
-
-async function getAccount(id: string) {
-  const api = ApiClient.instance;
-  const token = (await cookies()).get('token')?.value;
-
-  const account = await api.request<Account>(`/api/Accounts/${id}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return account;
-}
 
 async function AccountDetailsPage({ params }: Props) {
   const { id } = await params;
 
-  const account = await getAccount(id);
+  let account: Account | null = null;
+
+  try {
+    account = await getAccount(id);
+  } catch {
+    return notFound();
+  }
 
   return (
     <>
@@ -32,7 +32,7 @@ async function AccountDetailsPage({ params }: Props) {
 
       <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-7">
         <Information account={account} />
-        <Actions id={account.id.toString()} />
+        <AccountActions id={account.id.toString()} />
       </div>
       <ChildrenAccounts accounts={account.children} />
     </>
@@ -53,14 +53,6 @@ function Information({ account }: { account: Account }) {
         <span className="text-xs text-gray-600">Current Balance</span>
         <span className="text-5xl font-semibold">{account.balance}S.P</span>
       </p>
-    </section>
-  );
-}
-
-function Actions({ id }: { id: string }) {
-  return (
-    <section className="rounded-2xl border border-gray-200 bg-white p-4 shadow lg:col-span-2">
-      <h3 className="text-xl font-semibold">Actions</h3>
     </section>
   );
 }

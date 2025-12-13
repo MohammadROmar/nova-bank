@@ -29,7 +29,7 @@ function SessionCleanup({ hasUser }: SessionCleanupProps) {
 
   return (
     <section className="mx-auto flex h-screen w-screen items-center justify-center p-4 text-center lg:w-[50vw]">
-      <div className="flex h-fit flex-col items-center justify-center gap-4 rounded-2xl border border-gray-300 bg-white p-4 shadow">
+      <div className="flex h-fit flex-col items-center justify-center gap-4 rounded-2xl border border-gray-200 bg-white p-4 shadow">
         <div className="mb-12 flex items-center gap-2">
           <div className="relative size-7">
             <Image

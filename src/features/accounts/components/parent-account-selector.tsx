@@ -1,30 +1,56 @@
+import { useEffect, useState } from 'react';
 import { components, GroupBase, OptionProps } from 'react-select';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import clsx from 'clsx';
 
-import { loadAccounts } from '../api/load-accounts';
+import { useLoadAccounts } from '../hooks/use-load-accounts';
 import { selectorStyles } from '@/shared/utils/selector-styles';
-import { Account } from '../models/accounts';
-
-type Option = Account & { label: string; value: string };
-
 import { getAccountStateStyles } from '../utils/get-account-state-styles';
+import { Account } from '../models/accounts';
+import type { Option } from '../models/load-user-options';
+
+type Props = {
+  id?: string;
+  username: string | null;
+  accountId?: number;
+  parentAccount?: Account;
+  disabled: boolean;
+};
 
 function ParentAccountSelector({
   id,
+  accountId,
+  username,
+  parentAccount,
   disabled,
-}: {
-  id?: string;
-  disabled: boolean;
-}) {
+}: Props) {
+  const defaultOption = parentAccount
+    ? {
+        ...parentAccount,
+        label: `${parentAccount.userName}, ID: ${parentAccount.id}`,
+        value: parentAccount.id.toString(),
+      }
+    : null;
+
+  const [value, setValue] = useState<Option | null>(defaultOption);
+  const loadAccounts = useLoadAccounts({ username, accountId });
+
+  useEffect(() => {
+    setValue(defaultOption);
+  }, [username]);
+
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor="parentId">Parent Account</label>
       <AsyncPaginate<Option, GroupBase<Option>, { page: number }>
+        value={value}
+        onChange={(newVal) => setValue(newVal)}
         inputId="parentId"
         name="parentId"
-        cacheUniqs={[id]}
+        cacheUniqs={[id, username]}
+        isClearable
         loadOptions={loadAccounts}
+        isSearchable={false}
         isDisabled={disabled}
         components={{ Option: AccountOption }}
         additional={{ page: 1 }}
