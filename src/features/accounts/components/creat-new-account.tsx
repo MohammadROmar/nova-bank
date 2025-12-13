@@ -7,6 +7,7 @@ import { useSuccessToast } from '@/features/dashboard/hooks/use-success-toast';
 import SelectorSkeleton from './selector-skeleton';
 import AccountTypeSelector from './account-type-selector';
 import FormActions from '@/features/dashboard/components/form-actions';
+import ErrorMessage from '@/shared/components/error-message';
 import { createAccountAction } from '../api/create-account';
 
 const UserSelector = dynamic(() => import('./user-selector'), {
@@ -44,9 +45,7 @@ export default function CreateNewAccount() {
       <AccountTypeSelector disabled={pending} />
       <Actions pending={pending} />
 
-      {state.success === false && (
-        <p className="text-sm text-red-500">{state.error}</p>
-      )}
+      <ErrorMessage state={state} />
     </form>
   );
 }
@@ -58,7 +57,7 @@ function Actions({ pending }: { pending: boolean }) {
         <span className="text-yellow-500">Note: </span>Fields marked{' '}
         <span className="text-red-500">*</span> are required.
       </p>
-      <FormActions label="Create" disabled={pending} />
+      <FormActions label="Create" pending={pending} />
     </>
   );
 }

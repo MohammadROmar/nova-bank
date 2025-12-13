@@ -26,21 +26,30 @@ export async function updateAccountAction(
   const parentAccountId = parentId
     ? parentId?.trim().length === 0
       ? null
-      : parentId
+      : +parentId
     : null;
+
+  console.log({
+    type,
+    parentAccountId,
+    userId: '3333ebda-dc96-48d4-95a9-d9a979c5fc96',
+  });
 
   try {
     const token = (await cookies()).get('token')?.value;
     if (!token) throw new UnauthorizedError();
 
     const api = ApiClient.instance;
-    api.request(`/api/Accounts/${accountId}/Update`, {
+    await api.request(`/api/Accounts/${accountId}/Update`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ type, parentAccountId }),
+      body: JSON.stringify({
+        type,
+        parentAccountId,
+      }),
     });
 
     revalidatePath(`dashboard/accounts/${accountId}/update`);

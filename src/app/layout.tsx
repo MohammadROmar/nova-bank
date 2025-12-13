@@ -23,7 +23,7 @@ function RootLayout({ children }: PropsWithChildren) {
     <html lang="en">
       <body
         dir="ltr"
-        className={`${inter.variable} bg-background selection:bg-primary antialiased selection:text-white`}
+        className={`${inter.variable} bg-background font-inter selection:bg-primary antialiased selection:text-white`}
       >
         {children}
       </body>

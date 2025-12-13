@@ -1,20 +1,21 @@
 import Button from '@/shared/components/button';
 
-type Props = { label: string; disabled: boolean };
+type Props = { label: string; pending: boolean; disabled?: boolean };
 
-function FormActions({ label, disabled }: Props) {
+function FormActions({ label, pending, disabled }: Props) {
   return (
     <div className="flex justify-end">
       <div className="flex items-center gap-2 max-lg:w-full max-lg:flex-col-reverse">
         <button
-          disabled={disabled}
+          disabled={pending || disabled}
           type="reset"
           className="button bg-transparent! font-normal text-current! max-lg:w-full"
         >
           Reset
         </button>
         <Button
-          pending={disabled}
+          pending={pending}
+          disabled={pending || disabled}
           className="flex items-center justify-center max-lg:w-full"
         >
           {label}

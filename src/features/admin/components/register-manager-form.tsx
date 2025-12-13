@@ -7,6 +7,7 @@ import Input from '@/shared/components/input';
 import PasswordInput from '@/shared/components/password-input';
 import FormActions from '@/features/dashboard/components/form-actions';
 import { registerManagerAction } from '../api/register-manager';
+import ErrorMessage from '@/shared/components/error-message';
 
 export default function RegisterManagerForm() {
   const [state, formAction, pending] = useActionState(
@@ -62,11 +63,8 @@ export default function RegisterManagerForm() {
         />
       </div>
 
-      <FormActions label="Register" disabled={pending} />
-
-      {state.success === false && (
-        <p className="text-sm text-red-500">{state.error}</p>
-      )}
+      <FormActions label="Register" pending={pending} />
+      <ErrorMessage state={state} />
     </form>
   );
 }

@@ -41,12 +41,13 @@ export async function registerManagerAction(
     };
   } catch (err) {
     let error =
-      'Unexpected error has occurred. Please check your input or try agin later';
+      'Unexpected error has occurred. Please check your input or try agin later.';
 
     if (err instanceof ValidationError) {
       error = err.message;
     } else if (err instanceof HttpError) {
-      error = 'Failed to register manager';
+      error =
+        'Failed to register manager. Make sure to enter a unique username and password.';
     }
 
     return {

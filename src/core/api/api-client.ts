@@ -36,7 +36,10 @@ export class ApiClient {
       }
 
       return await response.json();
-    } catch {
+    } catch (err) {
+      if (err instanceof UnauthorizedError || err instanceof HttpError) {
+        throw err;
+      }
       throw new ServerError();
     }
   }

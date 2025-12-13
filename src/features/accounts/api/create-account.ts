@@ -30,7 +30,7 @@ export async function createAccountAction(
     if (!token) throw new UnauthorizedError();
 
     const api = ApiClient.instance;
-    api.request('/api/Accounts', {
+    await api.request('/api/Accounts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

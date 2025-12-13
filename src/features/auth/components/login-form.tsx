@@ -4,6 +4,7 @@ import { useActionState } from 'react';
 
 import Input from '@/shared/components/input';
 import Button from '@/shared/components/button';
+import ErrorMessage from '@/shared/components/error-message';
 import { loginAction } from '../api/login';
 
 export default function LoginForm() {
@@ -34,14 +35,12 @@ export default function LoginForm() {
       <Button
         pending={pending}
         aria-live="polite"
-        className="flex items-center justify-center"
+        className="poinnon flex items-center justify-center"
       >
         Login
       </Button>
 
-      {state.success === false && (
-        <p className="text-sm text-red-500">{state.error}</p>
-      )}
+      <ErrorMessage state={state} />
     </form>
   );
 }

@@ -27,7 +27,7 @@ export async function changeAccountState(
     if (!token) throw new UnauthorizedError();
 
     const api = ApiClient.instance;
-    api.request(`/api/Accounts/${accountId}/ChangeState`, {
+    await api.request(`/api/Accounts/${accountId}/ChangeState`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

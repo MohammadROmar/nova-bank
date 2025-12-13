@@ -7,6 +7,7 @@ import { useSuccessToast } from '@/features/dashboard/hooks/use-success-toast';
 import AccountTypeSelector from './account-type-selector';
 import SelectorSkeleton from './selector-skeleton';
 import FormActions from '@/features/dashboard/components/form-actions';
+import ErrorMessage from '@/shared/components/error-message';
 import { updateAccountAction } from '../api/update-account';
 import { Account } from '../models/accounts';
 
@@ -29,6 +30,8 @@ function UpdateAccountForm({ account, parentAccount }: Props) {
     state.success,
   ]);
 
+  const isClosed = account.state == 'Closed';
+
   return (
     <form
       action={formAction}
@@ -42,16 +45,17 @@ function UpdateAccountForm({ account, parentAccount }: Props) {
         </p>
       </div>
       <ParentAccountSelector
-        disabled={pending}
+        disabled={pending || isClosed}
         accountId={account.id}
         parentAccount={parentAccount ?? undefined}
         username={account.userName}
       />
-      <AccountTypeSelector defaultType={account.type} disabled={pending} />
-      <FormActions label="Update" disabled={pending} />
-      {state.success === false && (
-        <p className="text-sm text-red-500">{state.error}</p>
-      )}
+      <AccountTypeSelector
+        defaultType={account.type}
+        disabled={pending || isClosed}
+      />
+      <FormActions label="Update" pending={pending} disabled={isClosed} />
+      <ErrorMessage state={state} />
     </form>
   );
 }

@@ -4,6 +4,7 @@ import { useActionState } from 'react';
 
 import { useSuccessToast } from '@/features/dashboard/hooks/use-success-toast';
 import FormActions from '@/features/dashboard/components/form-actions';
+import ErrorMessage from '@/shared/components/error-message';
 import { changeAccountState } from '../api/change-account-state';
 import { accountStates } from '../data/account-states';
 import { Account } from '../models/accounts';
@@ -25,7 +26,7 @@ function ChangeAccountState({ id, defaultState }: Props) {
   return (
     <form
       action={formAction}
-      className="mt-8 space-y-6 rounded-2xl border border-gray-200 bg-white p-4 shadow"
+      className="mt-6 space-y-6 rounded-2xl border border-gray-200 bg-white p-4 shadow"
     >
       <h3 className="text-lg font-medium">Account State</h3>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -34,6 +35,7 @@ function ChangeAccountState({ id, defaultState }: Props) {
             <input
               type="radio"
               name="accountState"
+              disabled={pending || defaultState === 'Closed'}
               defaultChecked={selectedState === id}
               value={id}
               className="peer sr-only"
@@ -49,7 +51,12 @@ function ChangeAccountState({ id, defaultState }: Props) {
         ))}
       </div>
 
-      <FormActions label="Change" disabled={pending} />
+      <FormActions
+        label="Change"
+        pending={pending}
+        disabled={defaultState === 'Closed'}
+      />
+      <ErrorMessage state={state} />
     </form>
   );
 }

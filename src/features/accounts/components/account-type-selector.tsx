@@ -20,7 +20,7 @@ function AccountTypeSelector({ defaultType, disabled }: Props) {
               name="accountType"
               defaultChecked={selectedType === id}
               disabled={disabled}
-              value={id}
+              value={name}
               className="peer sr-only"
             />
             <div className="bg-background peer-checked:border-primary peer-checked:bg-primary/10 peer-checked:text-primary flex w-full cursor-pointer justify-between rounded-2xl border-2 border-transparent px-4 py-3 shadow transition-colors duration-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-60">
