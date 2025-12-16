@@ -34,7 +34,7 @@ export const CloseMenu = memo(function CloseMenu({ onClose }: CloseMenuProps) {
       onClick={onClose}
       className="cursor-pointer lg:hidden"
     >
-      <CloseIcon className="size-7 shrink-0 lg:hidden" />
+      <CloseIcon className="size-5.5 shrink-0 text-white lg:hidden" />
     </button>
   );
 });

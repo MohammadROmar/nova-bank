@@ -51,7 +51,7 @@ export default function Logout() {
 
       <button
         onClick={() => setIsOpen(true)}
-        className="button flex cursor-pointer gap-2 bg-transparent p-4 font-normal text-red-500! focus:outline-red-500"
+        className="flex cursor-pointer gap-2 px-4 py-3 text-red-500 transition-all duration-500 hover:scale-98 hover:text-red-600 focus:outline-red-500"
       >
         <span>
           <LogoutIcon className="size-6 shrink-0" />

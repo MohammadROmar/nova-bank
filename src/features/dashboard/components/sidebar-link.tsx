@@ -24,8 +24,8 @@ function SidebarLink({ label, href, icon, onNvaigate }: SidebarLinkProps) {
         href={href}
         onNavigate={onNvaigate}
         className={clsx(
-          'button flex items-center gap-2 py-3',
-          !isActive && 'bg-transparent font-normal text-current!',
+          'flex items-center gap-2 rounded-2xl border border-transparent px-4 py-3 text-white/50 transition-all duration-500 hover:scale-98 hover:text-white',
+          isActive && 'border-gray-200 bg-white/15 font-medium text-white!',
         )}
       >
         <span>{icon}</span>

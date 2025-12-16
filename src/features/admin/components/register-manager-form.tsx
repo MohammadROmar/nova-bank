@@ -31,6 +31,7 @@ export default function RegisterManagerForm() {
             id="username"
             label="Username"
             autoComplete="username"
+            disabled={pending}
             placeholder="Enter a unique username"
             defaultValue={state.values?.userName}
             className="lg:bg-background!"
@@ -39,6 +40,7 @@ export default function RegisterManagerForm() {
             id="phoneNumber"
             label="Phone Number"
             autoComplete="tel"
+            disabled={pending}
             placeholder="Enter phone number"
             defaultValue={state.values?.phoneNumber}
             className="lg:bg-background!"
@@ -48,6 +50,7 @@ export default function RegisterManagerForm() {
           id="email"
           label="Email Address"
           autoComplete="email"
+          disabled={pending}
           type="email"
           placeholder="Enter a unique email"
           defaultValue={state.values?.email}
@@ -56,6 +59,7 @@ export default function RegisterManagerForm() {
         <PasswordInput
           actionResultId={state.id}
           success={state.success}
+          disabled={pending}
           label="Password"
           placeholder="Enter a secure password"
           defaultValue={state.values?.password}

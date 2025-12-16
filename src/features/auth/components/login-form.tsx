@@ -20,12 +20,14 @@ export default function LoginForm() {
         id="email"
         defaultValue={state.email}
         autoComplete="email"
+        disabled={pending}
         placeholder="example@email.com"
         label="Email Address"
       />
       <Input
         type="password"
         id="password"
+        disabled={pending}
         min={8}
         defaultValue={state.password}
         autoComplete="current-password"

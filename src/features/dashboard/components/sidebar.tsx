@@ -27,7 +27,7 @@ function Sidebar({ role }: SidebarProps) {
         id="sidebar"
         aria-live="polite"
         className={clsx(
-          'fixed inset-y-0 z-50 max-h-screen w-80 max-w-[90vw] border-r border-gray-200 bg-white transition-transform duration-500 lg:sticky lg:top-0 ltr:left-0 max-lg:ltr:-translate-x-full rtl:right-0 max-lg:rtl:translate-x-full',
+          'bg-primary fixed inset-y-0 z-50 max-h-screen w-80 max-w-[90vw] border-r border-gray-200 transition-transform duration-500 lg:sticky lg:top-0 ltr:left-0 max-lg:ltr:-translate-x-full rtl:right-0 max-lg:rtl:translate-x-full',
           isOpen && 'translate-x-0!',
         )}
       >
@@ -78,7 +78,7 @@ const SidebarHeader = memo(function SidebarHeader({
   return (
     <div className="flex items-center justify-between p-4">
       <Link href="/dashboard" className="flex items-center gap-2">
-        <div className="relative size-7">
+        <div className="relative size-6">
           <Image
             src={logoImg}
             alt=""
@@ -86,10 +86,12 @@ const SidebarHeader = memo(function SidebarHeader({
             fill
             sizes="28px"
             priority
-            className="object-contain object-center"
+            className="object-contain object-center brightness-0 contrast-200 invert"
           />
         </div>
-        <h1 className="text-2xl font-black tracking-tighter">{title}</h1>
+        <h1 className="text-2xl leading-none font-black tracking-tighter text-white">
+          {title}
+        </h1>
       </Link>
 
       {isOpen && <CloseMenu onClose={onClose} />}

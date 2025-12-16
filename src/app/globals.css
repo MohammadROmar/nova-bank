@@ -35,9 +35,9 @@
 }
 
 @utility button {
-  @apply bg-primary focus:ring-primary focus:outline-primary w-full cursor-pointer rounded-2xl px-4 py-2 font-medium text-white! transition-transform duration-500 select-none hover:scale-95 focus:outline-2 focus:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-75;
+  @apply bg-primary focus:outline-primary w-full cursor-pointer rounded-2xl px-4 py-2 font-medium text-white! transition-transform duration-500 select-none hover:scale-95 focus:outline-2 focus:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-75;
 }
 
 @utility input {
-  @apply focus:ring-primary w-full rounded-2xl border border-gray-200 bg-white px-4 py-2 placeholder:text-gray-600 focus:ring-2 focus:outline-0;
+  @apply focus:ring-primary w-full rounded-2xl border border-gray-200 bg-white px-4 py-2 placeholder:text-gray-600 focus:ring-2 focus:outline-0 disabled:cursor-not-allowed disabled:opacity-60;
 }

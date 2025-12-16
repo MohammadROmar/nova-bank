@@ -7,6 +7,7 @@ export async function POST() {
   const cookieStore = await cookies();
 
   const token = cookieStore.get('token')?.value;
+  console.log(token);
   const refreshToken = cookieStore.get('refresh_token')?.value;
 
   if (!token || !refreshToken) {

@@ -3,6 +3,7 @@ import clsx from 'clsx';
 
 import { formatDate } from '../../../shared/utils/format-date';
 import { getAccountStateStyles } from '@/features/accounts/utils/get-account-state-styles';
+import { formatBalance } from '../utils/format-balance';
 import { Account } from '@/features/accounts/models/accounts';
 
 type AccountCardProps = { account: Account; className?: string };
@@ -17,8 +18,8 @@ function AccountCard({ account, className }: AccountCardProps) {
     >
       <div className="space-y-4 p-4">
         <div className="flex items-center justify-between gap-4">
-          <div>
-            <h3 className="font-semibold">{account.userName}</h3>
+          <div className="max-w-1/2">
+            <h3 className="truncate font-semibold">{account.userName}</h3>
             <p className="space-x-2 text-xs text-gray-600">
               <span>ID:</span>
               <span>{account.id}</span>
@@ -52,7 +53,9 @@ function AccountCard({ account, className }: AccountCardProps) {
             <span className="text-xs leading-none font-bold tracking-tighter text-gray-600">
               BALANCE
             </span>
-            <span className="text-2xl font-bold">{account.balance}S.P</span>
+            <span className="text-2xl font-bold">
+              {formatBalance(account.balance)}
+            </span>
           </p>
         </div>
       </div>

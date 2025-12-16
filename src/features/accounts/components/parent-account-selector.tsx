@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import { useLoadAccounts } from '../hooks/use-load-accounts';
 import { selectorStyles } from '@/shared/utils/selector-styles';
 import { getAccountStateStyles } from '../utils/get-account-state-styles';
+import { formatBalance } from '../utils/format-balance';
 import { Account } from '../models/accounts';
 import type { Option } from '../models/load-user-options';
 
@@ -95,7 +96,7 @@ function AccountOption(props: OptionProps<Option>) {
             BALANCE
           </span>
           <span className="text-xl leading-none font-bold">
-            {data.balance}S.P
+            {formatBalance(data.balance)}
           </span>
         </p>
       </div>

@@ -7,6 +7,7 @@ import AccountActions from '@/features/accounts/components/account-actions';
 import AccountCard from '@/features/accounts/components/account-card';
 import { getAccount } from '@/features/accounts/api/get-accounts';
 import { getAccountDetails } from '@/features/accounts/utils/get-account-details';
+import { formatBalance } from '@/features/accounts/utils/format-balance';
 import { Account } from '@/features/accounts/models/accounts';
 
 export const metadata: Metadata = { title: 'Account Details' };
@@ -51,7 +52,9 @@ function Information({ account }: { account: Account }) {
       </div>
       <p className="mt-6 flex flex-col">
         <span className="text-xs text-gray-600">Current Balance</span>
-        <span className="text-5xl font-semibold">{account.balance}S.P</span>
+        <span className="text-5xl font-semibold">
+          {formatBalance(account.balance)}
+        </span>
       </p>
     </section>
   );
