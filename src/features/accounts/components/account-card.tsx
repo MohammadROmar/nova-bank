@@ -53,7 +53,7 @@ function AccountCard({ account, className }: AccountCardProps) {
             <span className="text-xs leading-none font-bold tracking-tighter text-gray-600">
               BALANCE
             </span>
-            <span className="text-2xl font-bold">
+            <span className="truncate text-2xl font-bold">
               {formatBalance(account.balance)}
             </span>
           </p>

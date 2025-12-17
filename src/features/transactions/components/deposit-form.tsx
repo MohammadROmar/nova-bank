@@ -2,7 +2,8 @@
 
 import { useActionState } from 'react';
 
-import { useSuccessToast } from '@/features/dashboard/hooks/use-success-toast';
+import { useUserRoleContext } from '@/shared/store/role';
+import { useTransactioToast } from '../hooks/use-transaction-toast';
 import TransactionAccount from './account';
 import ErrorMessage from '@/shared/components/error-message';
 import AmountInput from './amount-input';
@@ -14,10 +15,14 @@ type DepositFormProps = { account: Account };
 function DepositForm({ account }: DepositFormProps) {
   const action = depositAction.bind(null, account.id);
   const [state, formAction, pending] = useActionState(action, {});
-  useSuccessToast('transaction Successful', state.success, [
-    state.id,
-    state.success,
-  ]);
+
+  const { role } = useUserRoleContext();
+  useTransactioToast({
+    accountId: account.id,
+    role,
+    transactionType: 'Deposit',
+    state,
+  });
 
   return (
     <>
@@ -25,7 +30,7 @@ function DepositForm({ account }: DepositFormProps) {
 
       <form action={formAction} className="mt-6 space-y-6">
         <AmountInput
-          operation="+"
+          transactionType="Deposit"
           balance={account.balance}
           pending={pending}
         />

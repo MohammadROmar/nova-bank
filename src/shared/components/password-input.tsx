@@ -56,7 +56,7 @@ function PasswordRules({ password }: { password: string }) {
           <span
             className={clsx(
               'flex items-center justify-center overflow-hidden rounded-full p-1 text-white',
-              passed ? 'bg-green-500' : 'bg-red-500',
+              passed ? 'bg-green-600' : 'bg-red-600',
             )}
           >
             {passed ? (
@@ -65,7 +65,7 @@ function PasswordRules({ password }: { password: string }) {
               <XIcon className="size-1.5" />
             )}
           </span>
-          <span className={passed ? 'text-green-500' : undefined}>{label}</span>
+          <span className={passed ? 'text-green-600' : undefined}>{label}</span>
         </li>
       ))}
     </ul>

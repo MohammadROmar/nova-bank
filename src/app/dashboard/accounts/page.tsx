@@ -4,9 +4,9 @@ import { cookies } from 'next/headers';
 import PageTitle from '@/features/dashboard/components/page-title';
 import UserSearchInput from '@/features/accounts/components/user-seach';
 import AccountCard from '@/features/accounts/components/account-card';
+import Pagination from '@/features/dashboard/components/pagination';
 import { ApiClient } from '@/core/api/api-client';
 import { Account } from '@/features/accounts/models/accounts';
-import Pagination from '@/features/dashboard/components/pagination';
 
 export const metadata: Metadata = { title: 'All Accounts' };
 

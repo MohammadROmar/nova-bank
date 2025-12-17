@@ -1,8 +1,9 @@
 'use client';
 
-import Search from '@/assets/icons/search';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+
+import Search from '@/assets/icons/search';
 
 export default function UserSearchInput() {
   const router = useRouter();
@@ -13,7 +14,7 @@ export default function UserSearchInput() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams();
     if (value) {
       params.set('username', value);
     } else {

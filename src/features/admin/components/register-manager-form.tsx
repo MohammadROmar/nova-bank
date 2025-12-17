@@ -23,7 +23,7 @@ export default function RegisterManagerForm() {
   return (
     <form
       action={formAction}
-      className="border-gray-w00 mt-8 space-y-6 max-lg:flex max-lg:flex-col max-lg:justify-between lg:h-fit lg:rounded-2xl lg:border lg:bg-white lg:p-4"
+      className="mt-8 space-y-6 rounded-2xl border border-gray-200 bg-white p-4"
     >
       <div className="space-y-6">
         <div className="flex w-full flex-col gap-6 lg:flex-row">
@@ -34,7 +34,7 @@ export default function RegisterManagerForm() {
             disabled={pending}
             placeholder="Enter a unique username"
             defaultValue={state.values?.userName}
-            className="lg:bg-background!"
+            className="bg-background!"
           />
           <Input
             id="phoneNumber"
@@ -43,7 +43,7 @@ export default function RegisterManagerForm() {
             disabled={pending}
             placeholder="Enter phone number"
             defaultValue={state.values?.phoneNumber}
-            className="lg:bg-background!"
+            className="bg-background!"
           />
         </div>
         <Input
@@ -54,7 +54,7 @@ export default function RegisterManagerForm() {
           type="email"
           placeholder="Enter a unique email"
           defaultValue={state.values?.email}
-          className="lg:bg-background!"
+          className="bg-background!"
         />
         <PasswordInput
           actionResultId={state.id}
@@ -63,7 +63,7 @@ export default function RegisterManagerForm() {
           label="Password"
           placeholder="Enter a secure password"
           defaultValue={state.values?.password}
-          className="lg:bg-background!"
+          className="bg-background!"
         />
       </div>
 

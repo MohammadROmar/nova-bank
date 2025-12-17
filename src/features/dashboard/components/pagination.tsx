@@ -49,8 +49,8 @@ export default function Pagination({
 
           router.push(buildHref(prev));
         }}
-        disabled={currentPage === 1}
-        aria-disabled={currentPage === 1}
+        disabled={currentPage === 1 || totalPages === 0}
+        aria-disabled={currentPage === 1 || totalPages === 0}
         className="size-full cursor-pointer border-gray-200 p-2 disabled:cursor-not-allowed disabled:text-current/50 ltr:border-r rtl:border-l"
       >
         <ArrowLeftIcon className="size-4 rtl:rotate-180" />
@@ -90,8 +90,8 @@ export default function Pagination({
           const next = Math.min(totalPages, currentPage + 1);
           router.push(buildHref(next));
         }}
-        disabled={currentPage === totalPages}
-        aria-disabled={currentPage === totalPages}
+        disabled={currentPage === totalPages || totalPages === 0}
+        aria-disabled={currentPage === totalPages || totalPages === 0}
         className="cursor-pointer p-2 disabled:cursor-not-allowed disabled:text-current/50"
       >
         <ArrowLeftIcon className="size-4 ltr:rotate-180" />

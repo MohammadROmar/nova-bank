@@ -15,7 +15,7 @@ function ChangeAccountState({ id, defaultState }: Props) {
   const action = changeAccountState.bind(null, id);
   const [state, formAction, pending] = useActionState(action, {});
 
-  useSuccessToast('Account Created Successfully', state.success, [
+  useSuccessToast('Account State Updated Successfully', state.success, [
     state.id,
     state.success,
   ]);
@@ -35,7 +35,7 @@ function ChangeAccountState({ id, defaultState }: Props) {
             <input
               type="radio"
               name="accountState"
-              disabled={pending || defaultState === 'Closed'}
+              disabled={pending}
               defaultChecked={selectedState === id}
               value={id}
               className="peer sr-only"
@@ -51,11 +51,7 @@ function ChangeAccountState({ id, defaultState }: Props) {
         ))}
       </div>
 
-      <FormActions
-        label="Change"
-        pending={pending}
-        disabled={defaultState === 'Closed'}
-      />
+      <FormActions label="Change" pending={pending} />
       <ErrorMessage state={state} />
     </form>
   );

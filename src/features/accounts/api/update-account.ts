@@ -29,12 +29,6 @@ export async function updateAccountAction(
       : +parentId
     : null;
 
-  console.log({
-    type,
-    parentAccountId,
-    userId: '3333ebda-dc96-48d4-95a9-d9a979c5fc96',
-  });
-
   try {
     const token = (await cookies()).get('token')?.value;
     if (!token) throw new UnauthorizedError();

@@ -8,17 +8,26 @@ import { ServerError } from '@/core/errors/server';
 import { UnauthorizedError } from '@/core/errors/unauthorized';
 import type { ActionState } from '../models/action-state';
 
-export async function depositAction(
+export async function transferAction(
   accountId: number,
   _: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
   const amount = formData.get('amount')?.toString() ?? '';
+  const toAccountId = formData.get('toAccountId')?.toString() ?? '';
 
   const amountASNumber = +amount;
+  const toAccountIdAsNumber = +toAccountId;
 
-  if (isNaN(amountASNumber) || amountASNumber <= 0) {
-    return { success: false, error: 'Please enter a valid amount' };
+  if (
+    isNaN(amountASNumber) ||
+    amountASNumber <= 0 ||
+    isNaN(toAccountIdAsNumber)
+  ) {
+    return {
+      success: false,
+      error: 'make sure to enter a valid amount and account',
+    };
   }
 
   try {
@@ -26,16 +35,17 @@ export async function depositAction(
 
     if (!token) throw new UnauthorizedError();
 
-    const transaction = await TransactionsFacade.deposit(
+    const transaction = await TransactionsFacade.transfer(
       accountId,
+      toAccountIdAsNumber,
       amountASNumber,
       token,
     );
 
-    revalidatePath(`/dashboard/accounts/${accountId}/transactions/deposit`);
+    revalidatePath(`/dashboard/accounts/${accountId}/transactions/transfer`);
     return { id: Date.now().toString(), success: true, transaction };
   } catch (err) {
-    let error = 'An error occured depositing. Please try again later.';
+    let error = 'An error occured transfering. Please try again later.';
 
     if (err instanceof UnauthorizedError) {
       error = 'Unauthorized - Please check your session and try again.';

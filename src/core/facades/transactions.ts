@@ -1,40 +1,59 @@
 import { ApiClient } from '../api/api-client';
+import { Transaction } from '@/features/transactions/models/transaction';
 
 export class TransactionsFacade {
   static #api = ApiClient.instance;
 
   public static async deposit(
-    amount: number,
     accountId: number,
+    amount: number,
     token: string,
   ) {
-    return this.#api.request(`/api/Transactions/${accountId}/Deposit`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+    return this.#api.request<Transaction>(
+      `/api/Transactions/${accountId}/Deposit`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ amount }),
       },
-      body: JSON.stringify({ amount }),
-    });
+    );
   }
   public static async withdraw(
-    amount: number,
     accountId: number,
+    amount: number,
     token: string,
   ) {
-    return this.#api.request(`/api/Transactions/${accountId}/Withdraw`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+    return this.#api.request<Transaction>(
+      `/api/Transactions/${accountId}/Withdraw`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ amount }),
       },
-      body: JSON.stringify({ amount }),
-    });
+    );
   }
   public static async transfer(
-    amount: number,
     fromAccount: number,
-    toAccount: number,
+    toAccountId: number,
+    amount: number,
     token: string,
-  ) {}
+  ) {
+    return this.#api.request<Transaction>(
+      `/api/Transactions/${fromAccount}/Transfer`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ amount, toAccountId }),
+      },
+    );
+  }
 }

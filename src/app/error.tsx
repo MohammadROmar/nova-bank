@@ -11,7 +11,7 @@ export default function ErrorPage({ error }: { error: Error }) {
 
   if (error.name === 'HttpError') {
     title = 'Request Failed';
-    subtitle = 'The server returned an unexpected response. PLease try again.';
+    subtitle = 'The server returned an unexpected response. Please try again.';
   } else if (error.name === 'UnauthorizedError') {
     title = 'Access Denied';
     subtitle =

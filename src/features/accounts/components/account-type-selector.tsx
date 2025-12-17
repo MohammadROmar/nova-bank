@@ -10,7 +10,7 @@ function AccountTypeSelector({ defaultType, disabled }: Props) {
   return (
     <div className="flex flex-col gap-2">
       <label>
-        Account Type <span className="text-red-500">*</span>
+        Account Type <span className="text-red-600">*</span>
       </label>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {accountTypes.map(({ id, name, description, icon: Icon }, i) => (
