@@ -34,7 +34,6 @@ export default function Logout() {
           <Button
             pending={pending}
             className="flex items-center justify-center bg-red-500 focus:outline-red-500"
-            style={{ backgroundImage: 'none' }}
           >
             Logout
           </Button>

@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 
 import PageTitle from '@/features/dashboard/components/page-title';
-import UserSearchInput from '@/features/accounts/components/user-seach';
+import UserSearchInput from '@/features/accounts/components/user-search';
 import AccountCard from '@/features/accounts/components/account-card';
 import Pagination from '@/features/dashboard/components/pagination';
 import { ApiClient } from '@/core/api/api-client';
@@ -11,7 +11,7 @@ import { Account } from '@/features/accounts/models/accounts';
 export const metadata: Metadata = { title: 'All Accounts' };
 
 type AccountsPageProps = {
-  searchParams: Promise<{ page?: string; username?: string }>;
+  searchParams: Promise<{ pageNum?: string; username?: string }>;
 };
 type Accounts = {
   items: Account[];
@@ -21,23 +21,21 @@ type Accounts = {
   totalPages: number;
 };
 
-async function getAccounts(page?: string, username?: string) {
+async function getAccounts(pageNum?: string, username?: string) {
   const api = ApiClient.instance;
   const token = (await cookies()).get('token')?.value;
 
   const accounts = await api.request<Accounts>(
-    `/api/Accounts?pageNum=${page ?? 1}&pageSize=6${username ? `&username=${username}` : ''}`,
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    },
+    `/api/Accounts?pageNum=${pageNum ?? 1}&pageSize=6${username ? `&username=${username}` : ''}`,
+    { headers: { Authorization: `Bearer ${token}` } },
   );
   return accounts;
 }
 
 async function AccountsPage({ searchParams }: AccountsPageProps) {
-  const { page, username } = await searchParams;
+  const { pageNum, username } = await searchParams;
 
-  const accounts = await getAccounts(page, username);
+  const accounts = await getAccounts(pageNum, username);
 
   return (
     <section className="space-y-8">

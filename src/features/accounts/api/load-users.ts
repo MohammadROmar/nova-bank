@@ -18,7 +18,7 @@ export const loadUsers: LoadUserOptions = async (search, _, additional) => {
   const page = additional?.page ?? 1;
 
   const response = await fetch(
-    `/api/users?page=${page}${search ? `&userName=${search}` : ''}`,
+    `/api/users?pageNum=${page}${search ? `&userName=${search}` : ''}`,
   );
 
   const users = (await response.json()) as ResponseData;

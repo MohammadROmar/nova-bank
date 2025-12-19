@@ -6,18 +6,12 @@ import { User } from '@/features/auth/models/user';
 import type { ActionState } from '../models/action-state';
 
 type Props = {
-  accountId: number;
   role: User['role'];
   transactionType: string;
   state: ActionState;
 };
 
-export function useTransactioToast({
-  accountId,
-  role,
-  state,
-  transactionType,
-}: Props) {
+export function useTransactionToast({ role, state, transactionType }: Props) {
   const router = useRouter();
 
   useEffect(() => {
@@ -27,7 +21,7 @@ export function useTransactioToast({
     if (!strategy) return;
 
     strategy.show(transactionType, role, () =>
-      router.push(`/dashboard/accounts/${accountId}/transactions`),
+      router.push(`/dashboard/transactions/${state.transaction?.id}`),
     );
   }, [state]);
 }

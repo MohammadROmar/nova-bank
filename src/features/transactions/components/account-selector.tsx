@@ -6,15 +6,26 @@ import { selectorStyles } from '@/shared/utils/selector-styles';
 import { loadAccounts } from '../utils/load-accounts';
 import type { Option } from '@/features/accounts/models/load-user-options';
 
-type Props = { disabled: boolean };
+type Props = {
+  id?: string;
+  label?: string;
+  disabled: boolean;
+  required?: boolean;
+};
 
-function AccountSelector({ disabled }: Props) {
+function AccountSelector({
+  id = 'toAccountId',
+  label = 'Account',
+  required,
+  disabled,
+}: Props) {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor="toAccountId">Account</label>
+      <label htmlFor="toAccountId">{label}</label>
       <AsyncPaginate<Option, GroupBase<Option>, { page: number }>
-        inputId="toAccountId"
-        name="toAccountId"
+        inputId={id}
+        name={id}
+        required={required}
         loadOptions={loadAccounts}
         maxMenuHeight={250}
         isDisabled={disabled}

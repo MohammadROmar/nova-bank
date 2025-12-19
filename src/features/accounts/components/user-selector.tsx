@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { GroupBase } from 'react-select';
 import { AsyncPaginate } from 'react-select-async-paginate';
 
 import { loadUsers } from '../api/load-users';
@@ -18,13 +19,14 @@ function UserSelector({ disabled, changeUsername }: Props) {
       <label htmlFor="userId">
         User <span className="text-red-500">*</span>
       </label>
-      <AsyncPaginate
+      <AsyncPaginate<Option, GroupBase<Option>, { page: number }>
         value={value}
         onChange={(newVal) => {
           setValue(newVal);
           changeUsername(newVal?.label ?? null);
         }}
         inputId="userId"
+        isMulti={false}
         name="userId"
         loadOptions={loadUsers}
         required

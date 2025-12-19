@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { useActionState } from 'react';
 
 import { useUserRoleContext } from '@/shared/store/role';
-import { useTransactioToast } from '../hooks/use-transaction-toast';
+import { useTransactionToast } from '../hooks/use-transaction-toast';
 import TransactionAccount from './account';
 import AmountInput from './amount-input';
 import ErrorMessage from '@/shared/components/error-message';
@@ -24,12 +24,7 @@ function TransferForm({ account }: TransferFormProps) {
   const [state, formAction, pending] = useActionState(action, {});
 
   const { role } = useUserRoleContext();
-  useTransactioToast({
-    accountId: account.id,
-    role,
-    transactionType: 'Transfer',
-    state,
-  });
+  useTransactionToast({ role, transactionType: 'Transfer', state });
 
   return (
     <>
@@ -41,7 +36,7 @@ function TransferForm({ account }: TransferFormProps) {
           balance={account.balance}
           pending={pending}
         >
-          <AccountSelector disabled={pending} />
+          <AccountSelector required disabled={pending} />
         </AmountInput>
         <ErrorMessage state={state} />
       </form>

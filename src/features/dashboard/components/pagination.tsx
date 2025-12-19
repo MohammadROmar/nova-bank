@@ -35,7 +35,7 @@ export default function Pagination({
 
   function buildHref(page: number) {
     const newParams = new URLSearchParams(params);
-    newParams.set('page', String(page));
+    newParams.set('pageNum', String(page));
 
     const queryString = newParams.toString();
     return `${basePath}${queryString ? `?${queryString}` : ''}`;

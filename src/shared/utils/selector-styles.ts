@@ -1,7 +1,9 @@
 import clsx from 'clsx';
 import { GroupBase, type ClassNamesConfig } from 'react-select';
 
-type SelectorStyles = ClassNamesConfig<any, false, GroupBase<any>> | undefined;
+type SelectorStyles =
+  | ClassNamesConfig<any, boolean, GroupBase<any>>
+  | undefined;
 
 export const selectorStyles: SelectorStyles = {
   control: ({ isFocused, isDisabled }) =>

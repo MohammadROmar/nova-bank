@@ -3,7 +3,7 @@
 import { useActionState } from 'react';
 
 import { useUserRoleContext } from '@/shared/store/role';
-import { useTransactioToast } from '../hooks/use-transaction-toast';
+import { useTransactionToast } from '../hooks/use-transaction-toast';
 import TransactionAccount from './account';
 import ErrorMessage from '@/shared/components/error-message';
 import AmountInput from './amount-input';
@@ -17,12 +17,7 @@ function WithdrawForm({ account }: WithdrawFormProps) {
   const [state, formAction, pending] = useActionState(action, {});
 
   const { role } = useUserRoleContext();
-  useTransactioToast({
-    accountId: account.id,
-    role,
-    transactionType: 'Withdraw',
-    state,
-  });
+  useTransactionToast({ role, transactionType: 'Withdraw', state });
 
   return (
     <>

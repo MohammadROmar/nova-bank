@@ -48,7 +48,7 @@ export async function loginAction(
     });
   } catch (err) {
     let error =
-      'Please check your email and password or check internet internet or try again later.';
+      'Please check your email and password or check internet connection or try again later.';
     if (err instanceof ValidationError) {
       error = 'Invalid email or password.';
     } else if (err instanceof UnauthorizedError) {

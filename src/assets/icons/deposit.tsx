@@ -3,14 +3,23 @@ import { memo, type ComponentPropsWithoutRef } from 'react';
 function DepositIcon(props: ComponentPropsWithoutRef<'svg'>) {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor"
       viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
       aria-hidden
       {...props}
     >
-      <path d="M19.6 21H4.4C3.1 21 2 19.9 2 18.6V14h2v4.2c0 .6.4.8 1 .8h14c.6 0 1-.4 1-1v-4h2v4.6c0 1.3-1.1 2.4-2.4 2.4z" />
-      <path d="M15.3 12.1L13.4 14v-4c0-2 0-4.9 2.4-7-3.4.6-5.1 3.2-5.2 7v4l-1.9-1.9L7 13l5 5 5-5-1.7-.9z" />
+      <path
+        fill="currentColor"
+        d="M12.75 4C12.75 3.58579 12.4142 3.25 12 3.25C11.5858 3.25 11.25 3.58579 11.25 4L12.75 4ZM11.25 4L11.25 20H12.75L12.75 4L11.25 4Z"
+      />
+      <path
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M18 14L12 20L6 14"
+      />
     </svg>
   );
 }
