@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo, type ComponentProps } from 'react';
+import { useState, useMemo, type ComponentProps } from 'react';
 import clsx from 'clsx';
 
 import Input from './input';
@@ -8,20 +8,10 @@ import XIcon from '@/assets/icons/close';
 import CheckMark from '@/assets/icons/check-mark';
 import { REQUIREMENTS } from '../data/password-req';
 
-type InputProps = {
-  success?: boolean;
-  actionResultId?: string;
-  label: string;
-} & ComponentProps<'input'>;
+type InputProps = { label: string } & ComponentProps<'input'>;
 
-function PasswordInput({ actionResultId, success, ...props }: InputProps) {
+function PasswordInput(props: InputProps) {
   const [password, setPassword] = useState('');
-
-  useEffect(() => {
-    if (success) {
-      setPassword('');
-    }
-  }, [actionResultId, success]);
 
   return (
     <div className="space-y-2">

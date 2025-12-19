@@ -13,7 +13,7 @@ function AccountTypeSelector({ defaultType, disabled }: Props) {
         Account Type <span className="text-red-600">*</span>
       </label>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        {accountTypes.map(({ id, name, description, icon: Icon }, i) => (
+        {accountTypes.map(({ id, name, description, icon: Icon }) => (
           <label aria-disabled={disabled} key={id} className="size-full">
             <input
               type="radio"

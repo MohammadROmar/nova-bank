@@ -17,7 +17,7 @@ type SidebarProps = { role: 'Administrator' | 'Manager' };
 function Sidebar({ role }: SidebarProps) {
   const { isOpen, setIsOpen } = useSidebarContext();
 
-  const tabs = useMemo(() => getSidebarTabs(role), []);
+  const tabs = useMemo(() => getSidebarTabs(role), [role]);
 
   return (
     <>

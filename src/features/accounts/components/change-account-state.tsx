@@ -30,7 +30,7 @@ function ChangeAccountState({ id, defaultState }: Props) {
     >
       <h3 className="text-lg font-medium">Account State</h3>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        {accountStates.map(({ id, name, description, icon: Icon }, i) => (
+        {accountStates.map(({ id, name, description, icon: Icon }) => (
           <label key={id} className="size-full">
             <input
               type="radio"

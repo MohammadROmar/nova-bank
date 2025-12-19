@@ -2,16 +2,19 @@ import { useState, ChangeEvent, PropsWithChildren } from 'react';
 
 import Input from '@/shared/components/input';
 import CalculateBalance from './calculate-balance';
+import WarningMessage from '@/shared/components/warning-message';
 
 export type AmountInputProps = {
   transactionType: 'Deposit' | 'Withdraw' | 'Transfer';
   balance: number;
+  disabled?: boolean;
   pending: boolean;
 };
 
 function AmountInput({
   transactionType,
   balance,
+  disabled,
   pending,
   children,
 }: AmountInputProps & PropsWithChildren) {
@@ -24,6 +27,9 @@ function AmountInput({
 
   return (
     <>
+      {disabled && (
+        <WarningMessage text="This account is not active. Transactions can only be performed on active accounts." />
+      )}
       <div
         className={
           children ? 'grid grid-cols-1 gap-4 lg:grid-cols-2' : undefined
@@ -35,7 +41,7 @@ function AmountInput({
           type="text"
           inputMode="numeric"
           pattern="[0-9]*"
-          disabled={pending}
+          disabled={pending || disabled}
           value={amount}
           onChange={handleChange}
           placeholder="Enter numbers only"
@@ -45,6 +51,7 @@ function AmountInput({
       </div>
       <CalculateBalance
         amount={amount}
+        disabled={disabled || pending}
         transactionType={transactionType}
         balance={balance}
         pending={pending}

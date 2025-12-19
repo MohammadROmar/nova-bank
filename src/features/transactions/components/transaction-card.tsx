@@ -7,13 +7,10 @@ import {
 } from '../utils/transaction-styles';
 import { formatBalance } from '@/features/accounts/utils/format-balance';
 import { transactionCardDetails } from '../data/transaction-card-details';
+import { splitOnUppercase } from '../utils/split-on-uppercase';
 import type { Transaction } from '../models/transaction';
 
 type Props = { transaction: Transaction };
-
-function splitOnUppercase(str: string) {
-  return str.replace(/([a-z])([A-Z])/g, '$1 $2');
-}
 
 function TransactionCard({ transaction }: Props) {
   const typeStyles = transactionTypeStyles[transaction.transactionType];

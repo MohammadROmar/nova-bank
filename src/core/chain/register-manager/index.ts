@@ -15,7 +15,7 @@ abstract class BaseHandler {
     return handler;
   }
 
-  async handle(req: any): Promise<any> {
+  async handle(req: unknown): Promise<unknown> {
     if (this.next) return this.next.handle(req);
   }
 }

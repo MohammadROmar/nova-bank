@@ -27,7 +27,7 @@ async function getTransactions(searchParams: SearchParams) {
 
   const urlSearchParams = new URLSearchParams(searchParams);
   urlSearchParams.set('pageNum', searchParams.pageNum ?? '1');
-  urlSearchParams.set('pageSize', '12');
+  urlSearchParams.set('pageSize', '18');
 
   const transactions = await api.request<Transactions>(
     `/api/Transactions?${urlSearchParams.toString()}`,

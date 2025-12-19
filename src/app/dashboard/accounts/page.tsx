@@ -26,7 +26,7 @@ async function getAccounts(pageNum?: string, username?: string) {
   const token = (await cookies()).get('token')?.value;
 
   const accounts = await api.request<Accounts>(
-    `/api/Accounts?pageNum=${pageNum ?? 1}&pageSize=6${username ? `&username=${username}` : ''}`,
+    `/api/Accounts?pageNum=${pageNum ?? 1}&pageSize=18${username ? `&username=${username}` : ''}`,
     { headers: { Authorization: `Bearer ${token}` } },
   );
   return accounts;

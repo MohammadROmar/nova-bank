@@ -23,5 +23,5 @@ export function useTransactionToast({ role, state, transactionType }: Props) {
     strategy.show(transactionType, role, () =>
       router.push(`/dashboard/transactions/${state.transaction?.id}`),
     );
-  }, [state]);
+  }, [state, role, router, transactionType]);
 }

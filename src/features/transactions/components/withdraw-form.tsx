@@ -19,12 +19,15 @@ function WithdrawForm({ account }: WithdrawFormProps) {
   const { role } = useUserRoleContext();
   useTransactionToast({ role, transactionType: 'Withdraw', state });
 
+  const transactionDisabled = account.state !== 'Active';
+
   return (
     <>
       <TransactionAccount account={account} />
 
       <form action={formAction} className="mt-6 space-y-6">
         <AmountInput
+          disabled={transactionDisabled}
           transactionType="Withdraw"
           balance={account.balance}
           pending={pending}

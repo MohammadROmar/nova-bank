@@ -1,21 +1,33 @@
 import dynamic from 'next/dynamic';
+import { useMemo } from 'react';
 
 import SelectorSkeleton from '@/features/accounts/components/selector-skeleton';
 import { selectorStyles } from '@/shared/utils/selector-styles';
-import { useMemo } from 'react';
 
 const Select = dynamic(() => import('react-select'), {
   ssr: false,
   loading: () => <SelectorSkeleton />,
 });
 
+type Option = { value: string; label: string };
+
 type SelectorProps = {
   id: string;
   label: string;
-  options: { value: string; label: string }[];
+  isDisabled?: boolean;
+  defaultValue?: Option;
+  options: Option[];
+  isClearable?: boolean;
 };
 
-function Selector({ id, label, options }: SelectorProps) {
+function Selector({
+  id,
+  label,
+  options,
+  defaultValue,
+  isDisabled,
+  isClearable = true,
+}: SelectorProps) {
   return (
     <div className="flex w-full flex-col gap-2">
       <label htmlFor={id}>{label}</label>
@@ -23,10 +35,12 @@ function Selector({ id, label, options }: SelectorProps) {
         inputId={id}
         name={id}
         maxMenuHeight={150}
-        isClearable
+        isClearable={isClearable}
+        isDisabled={isDisabled}
         isSearchable
         options={options}
-        classNames={selectorStyles}
+        classNames={selectorStyles<unknown>()}
+        defaultValue={defaultValue}
       />
     </div>
   );
@@ -47,7 +61,17 @@ export function TransactionTypeSelector() {
   return <Selector id="type" label="Type" options={options} />;
 }
 
-export function TransactionStatusSelector() {
+type StatusSelectorProps = {
+  disabled?: boolean;
+  isClearable?: boolean;
+  defaultValue?: Option;
+};
+
+export function TransactionStatusSelector({
+  disabled,
+  isClearable,
+  defaultValue,
+}: StatusSelectorProps) {
   const options = useMemo(
     () => [
       { value: 'Approved', label: 'Approved' },
@@ -58,5 +82,14 @@ export function TransactionStatusSelector() {
     [],
   );
 
-  return <Selector id="status" label="Status" options={options} />;
+  return (
+    <Selector
+      id="status"
+      label="Status"
+      isDisabled={disabled}
+      isClearable={isClearable}
+      options={options}
+      defaultValue={defaultValue}
+    />
+  );
 }

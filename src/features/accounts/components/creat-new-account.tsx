@@ -10,10 +10,6 @@ import FormActions from '@/features/dashboard/components/form-actions';
 import ErrorMessage from '@/shared/components/error-message';
 import { createAccountAction } from '../api/create-account';
 
-const UserSelector = dynamic(() => import('./user-selector'), {
-  ssr: false,
-  loading: () => <SelectorSkeleton />,
-});
 const ParentAccountSelector = dynamic(
   () => import('./parent-account-selector'),
   {
@@ -36,11 +32,11 @@ export default function CreateNewAccount() {
       action={formAction}
       className="space-y-6 rounded-2xl border border-gray-200 bg-white p-4 shadow"
     >
-      <UserSelector disabled={pending} changeUsername={setUsername} />
       <ParentAccountSelector
         id={state.id}
         username={username}
         disabled={pending}
+        changeUsername={setUsername}
       />
       <AccountTypeSelector disabled={pending} />
       <Actions pending={pending} />

@@ -15,12 +15,8 @@ export function useSuccessToast(
 ) {
   useEffect(() => {
     if (showToast) {
-      toast.success(message, {
-        classNames: {
-          toast: 'bg-white! rounded-2xl! border-gray-200!',
-          icon: 'text-green-500',
-        },
-      });
+      toast.success(message, { classNames: SUCCESS_TOAST_STYLE });
     }
-  }, deps);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [message, showToast, ...deps]);
 }

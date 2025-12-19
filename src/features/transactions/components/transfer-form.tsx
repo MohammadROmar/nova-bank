@@ -26,6 +26,8 @@ function TransferForm({ account }: TransferFormProps) {
   const { role } = useUserRoleContext();
   useTransactionToast({ role, transactionType: 'Transfer', state });
 
+  const transactionDisabled = account.state !== 'Active';
+
   return (
     <>
       <TransactionAccount account={account} />
@@ -35,8 +37,9 @@ function TransferForm({ account }: TransferFormProps) {
           transactionType="Transfer"
           balance={account.balance}
           pending={pending}
+          disabled={transactionDisabled}
         >
-          <AccountSelector required disabled={pending} />
+          <AccountSelector required disabled={pending || transactionDisabled} />
         </AmountInput>
         <ErrorMessage state={state} />
       </form>

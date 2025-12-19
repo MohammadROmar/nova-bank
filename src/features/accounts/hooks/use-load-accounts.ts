@@ -47,7 +47,7 @@ export function useLoadAccounts({ username, accountId }: Props) {
         additional: { page: page + 1 },
       };
     },
-    [username],
+    [username, accountId],
   );
 
   return loadAccounts;

@@ -19,6 +19,8 @@ function DepositForm({ account }: DepositFormProps) {
   const { role } = useUserRoleContext();
   useTransactionToast({ role, transactionType: 'Deposit', state });
 
+  const transactionDisabled = account.state !== 'Active';
+
   return (
     <>
       <TransactionAccount account={account} />
@@ -26,6 +28,7 @@ function DepositForm({ account }: DepositFormProps) {
       <form action={formAction} className="mt-6 space-y-6">
         <AmountInput
           transactionType="Deposit"
+          disabled={transactionDisabled}
           balance={account.balance}
           pending={pending}
         />

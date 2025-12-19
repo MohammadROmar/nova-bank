@@ -15,6 +15,7 @@ import {
 } from './selectors';
 import { handleFilters } from '../utils/handle-filters';
 import Input from '@/shared/components/input';
+import Link from 'next/link';
 
 const AccountSelector = dynamic(() => import('./account-selector'), {
   ssr: false,
@@ -26,15 +27,22 @@ export default function TransactionsFilters() {
   return (
     <>
       <FiltersModal isOpen={isOpen} setIsOpen={setIsOpen} />
-      <Button
-        onClick={() => setIsOpen(true)}
-        className="flex w-fit items-center gap-2"
-      >
-        <span>
-          <FiltersIcon className="size-5" />
-        </span>
-        <span>Filters</span>
-      </Button>
+
+      <div className="flex items-center">
+        <Button
+          onClick={() => setIsOpen(true)}
+          className="mr-4 flex w-fit items-center gap-2"
+        >
+          <span>
+            <FiltersIcon className="size-5" />
+          </span>
+          <span>Filters</span>
+        </Button>
+
+        <div className="border-l border-l-gray-600 pl-4 text-sm text-gray-600">
+          <Link href="/dashboard/transactions">Unset</Link>
+        </div>
+      </div>
     </>
   );
 }
@@ -71,7 +79,7 @@ function FiltersModal({ isOpen, setIsOpen }: FiltersModalProps) {
             ACCOUNT REFRENSES
           </legend>
 
-          <AccountSelector id="accountId" disabled={false} />
+          <AccountSelector id="accountId" isClearable />
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             <Input
               id="from"

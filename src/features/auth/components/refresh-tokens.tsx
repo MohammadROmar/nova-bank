@@ -40,15 +40,18 @@ export default function RefreshTokens() {
     };
   }, []);
 
-  const handleClose = useCallback(async function handleClose() {
-    setHasError(false);
+  const handleClose = useCallback(
+    async function handleClose() {
+      setHasError(false);
 
-    fetch('/api/users/token/delete', {
-      method: 'DELETE',
-    })
-      .then(() => router.replace('/'))
-      .catch((e) => console.error(e));
-  }, []);
+      fetch('/api/users/token/delete', {
+        method: 'DELETE',
+      })
+        .then(() => router.replace('/'))
+        .catch((e) => console.error(e));
+    },
+    [router],
+  );
 
   return (
     <Modal

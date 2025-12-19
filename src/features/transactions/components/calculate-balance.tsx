@@ -7,6 +7,7 @@ type CalculateBalanceProps = AmountInputProps & { amount: string };
 function CalculateBalance({
   amount,
   transactionType,
+  disabled,
   balance,
   pending,
 }: CalculateBalanceProps) {
@@ -49,7 +50,7 @@ function CalculateBalance({
       <FormActions
         label={transactionType}
         pending={pending}
-        disabled={!isValidTransaction}
+        disabled={!isValidTransaction || disabled}
       />
     </>
   );

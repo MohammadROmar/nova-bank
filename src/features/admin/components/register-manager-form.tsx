@@ -57,8 +57,6 @@ export default function RegisterManagerForm() {
           className="bg-background!"
         />
         <PasswordInput
-          actionResultId={state.id}
-          success={state.success}
           disabled={pending}
           label="Password"
           placeholder="Enter a secure password"

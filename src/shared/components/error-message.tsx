@@ -1,7 +1,7 @@
 import InfoIcon from '@/assets/icons/info';
 
 type ErrorMessageProps = {
-  state: { success?: true } | { success?: false; error?: String };
+  state: { success?: true } | { success?: false; error?: string };
 };
 
 function ErrorMessage({ state }: ErrorMessageProps) {

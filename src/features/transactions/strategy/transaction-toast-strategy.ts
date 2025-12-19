@@ -1,4 +1,3 @@
-import { useRouter } from 'next/navigation';
 import { toast, ToastClassnames } from 'sonner';
 
 import { SUCCESS_TOAST_STYLE } from '@/features/dashboard/hooks/use-success-toast';

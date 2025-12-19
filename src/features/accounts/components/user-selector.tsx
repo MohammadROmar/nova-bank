@@ -32,7 +32,7 @@ function UserSelector({ disabled, changeUsername }: Props) {
         required
         isDisabled={disabled}
         additional={{ page: 1 }}
-        classNames={selectorStyles}
+        classNames={selectorStyles<Option>()}
       />
     </div>
   );

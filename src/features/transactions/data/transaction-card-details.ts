@@ -7,7 +7,7 @@ export function transactionCardDetails(transaction: Transaction) {
     { title: 'To Account', value: transaction.toAccountId ?? '-' },
     { title: 'Approved By', value: transaction.approvedByUserName ?? '-' },
     {
-      title: 'Approved At',
+      title: 'Approve Date',
       value: transaction.approvedAt ? formatDate(transaction.approvedAt) : '-',
     },
   ];

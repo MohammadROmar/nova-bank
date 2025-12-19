@@ -11,8 +11,8 @@ async function NotFoundPage() {
 
       <h2 className="text-primary text-3xl font-bold">Oops! Page Not Found</h2>
       <p className="max-w-xl text-sm text-gray-600">
-        The page you are looking for doesn't exist or has been removed. Please
-        check the URL or return Home.
+        The page you are looking for doesn&apos;t exist or has been removed.
+        Please check the URL or return Home.
       </p>
 
       <Link href="/" className="button w-fit text-nowrap">

@@ -9,8 +9,9 @@ import type { Option } from '@/features/accounts/models/load-user-options';
 type Props = {
   id?: string;
   label?: string;
-  disabled: boolean;
+  disabled?: boolean;
   required?: boolean;
+  isClearable?: boolean;
 };
 
 function AccountSelector({
@@ -18,6 +19,7 @@ function AccountSelector({
   label = 'Account',
   required,
   disabled,
+  isClearable,
 }: Props) {
   return (
     <div className="flex flex-col gap-2">
@@ -27,11 +29,12 @@ function AccountSelector({
         name={id}
         required={required}
         loadOptions={loadAccounts}
+        isClearable={isClearable}
         maxMenuHeight={250}
         isDisabled={disabled}
         components={{ Option: AccountOption }}
         additional={{ page: 1 }}
-        classNames={selectorStyles}
+        classNames={selectorStyles<Option>()}
       />
     </div>
   );
