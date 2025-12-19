@@ -16,7 +16,6 @@ type Props = { id: number; defaultStatus: Transaction['status'] };
 function ChangeTransactionStatus({ id, defaultStatus }: Props) {
   const action = changeTransactionStatus.bind(null, id);
   const [state, formAction, pending] = useActionState(action, {});
-  console.log(state);
 
   const { role } = useUserRoleContext();
   useSuccessToast('Status Changed Successfuly', state.success, [
