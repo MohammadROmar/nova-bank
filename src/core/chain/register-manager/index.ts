@@ -20,7 +20,7 @@ abstract class BaseHandler {
   }
 }
 
-class RegisterValidationHandler extends BaseHandler {
+class RegisterManagerValidationHandler extends BaseHandler {
   async handle(req: {
     userName: string;
     email: string;
@@ -76,7 +76,7 @@ class RegisterManagerBackendHandler extends BaseHandler {
 }
 
 export function buildRegisterManagerChain() {
-  const validationHandler = new RegisterValidationHandler();
+  const validationHandler = new RegisterManagerValidationHandler();
   const backendHandler = new RegisterManagerBackendHandler();
 
   validationHandler.setNext(backendHandler);

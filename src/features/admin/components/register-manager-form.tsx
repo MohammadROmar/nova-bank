@@ -6,8 +6,8 @@ import { useSuccessToast } from '@/features/dashboard/hooks/use-success-toast';
 import Input from '@/shared/components/input';
 import PasswordInput from '@/shared/components/password-input';
 import FormActions from '@/features/dashboard/components/form-actions';
-import { registerManagerAction } from '../api/register-manager';
 import ErrorMessage from '@/shared/components/error-message';
+import { registerManagerAction } from '../api/register-manager';
 
 export default function RegisterManagerForm() {
   const [state, formAction, pending] = useActionState(
@@ -57,6 +57,7 @@ export default function RegisterManagerForm() {
           className="bg-background!"
         />
         <PasswordInput
+          key={state.success ? `success-${state.id}` : 'password-input'}
           disabled={pending}
           label="Password"
           placeholder="Enter a secure password"
