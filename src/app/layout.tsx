@@ -1,13 +1,10 @@
-import type { Metadata } from 'next';
+import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import type { PropsWithChildren } from 'react';
 
 import './globals.css';
 
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
-});
+const inter = Inter({ variable: '--font-inter', subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: {
@@ -22,7 +19,6 @@ function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body
-        dir="ltr"
         className={`${inter.variable} bg-background font-inter selection:bg-primary antialiased selection:text-white`}
       >
         {children}

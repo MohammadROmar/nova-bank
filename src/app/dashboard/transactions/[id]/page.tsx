@@ -4,6 +4,7 @@ import clsx from 'clsx';
 
 import PageTitle from '@/features/dashboard/components/page-title';
 import CalenderIcon from '@/assets/icons/calender';
+import ChangeTransactionStatus from '@/features/transactions/components/change-status';
 import { ApiClient } from '@/core/api/api-client';
 import { formatBalance } from '@/features/accounts/utils/format-balance';
 import { formatDate, formateDateTime } from '@/shared/utils/format-date';
@@ -13,7 +14,6 @@ import {
   transactionTypeStyles,
 } from '@/features/transactions/utils/transaction-styles';
 import { Transaction } from '@/features/transactions/models/transaction';
-import ChangeTransactionStatus from '@/features/transactions/components/change-status';
 
 type Props = { params: Promise<{ id: string }> };
 

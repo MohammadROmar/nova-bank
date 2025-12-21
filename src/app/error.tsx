@@ -4,23 +4,32 @@ import Link from 'next/link';
 
 import InfoIcon from '@/assets/icons/info';
 
-export default function ErrorPage({ error }: { error: Error }) {
-  let title = 'Something Went Wrong';
-  let subtitle =
-    ' Oops! An un expected error occurred. You can got to home or try again.';
+type ErrorType = 'HttpError' | 'UnauthorizedError' | 'ServerError' | 'Error';
 
-  if (error.name === 'HttpError') {
-    title = 'Request Failed';
-    subtitle = 'The server returned an unexpected response. Please try again.';
-  } else if (error.name === 'UnauthorizedError') {
-    title = 'Access Denied';
-    subtitle =
-      "Your session has expired or you don't have permission to access this resource";
-  } else if (error.name === 'ServerError') {
-    title = 'Server Unreachable';
-    subtitle =
-      "We couldn't connect to the server. Check your connection and try again.";
-  }
+const errors = {
+  HttpError: {
+    title: 'Request Failed',
+    subtitle: 'The server returned an unexpected response. Please try again.',
+  },
+  UnauthorizedError: {
+    title: 'Access Denied',
+    subtitle:
+      "Your session has expired or you don't have permission to access this resource.",
+  },
+  ServerError: {
+    title: 'Server Unreachable',
+    subtitle:
+      "We couldn't connect to the server. Check your connection and try again.",
+  },
+  Error: {
+    title: 'Something Went Wrong',
+    subtitle:
+      'Oops! An unexpected error occurred. You can go to home or try again.',
+  },
+};
+
+export default function ErrorPage({ error }: { error: Error }) {
+  const { title, subtitle } = errors[error.name as ErrorType] || errors.Error;
 
   return (
     <section className="flex size-full h-screen w-screen flex-col items-center justify-center space-y-4 text-center text-balance">

@@ -1,11 +1,19 @@
-import { ValidationError } from '@/core/errors/validation';
+import { cookies } from 'next/headers';
+
 import { ApiClient } from '@/core/api/api-client';
+import { ValidationError } from '@/core/errors/validation';
+import { UnauthorizedError } from '@/core/errors/unauthorized';
 import { validateEmail } from '../../validation/email';
 import { validatePassword } from '../../validation/password';
-import { validateText } from '../../validation/text';
 import { validatePhoneNumber } from '../../validation/phone-number';
-import { cookies } from 'next/headers';
-import { UnauthorizedError } from '@/core/errors/unauthorized';
+import { validateText } from '../../validation/text';
+
+type ManagerCredentials = {
+  userName: string;
+  email: string;
+  password: string;
+  phoneNumber: string;
+};
 
 abstract class BaseHandler {
   protected next: BaseHandler | null = null;
@@ -15,18 +23,13 @@ abstract class BaseHandler {
     return handler;
   }
 
-  async handle(req: unknown): Promise<unknown> {
+  async handle(req: ManagerCredentials): Promise<unknown> {
     if (this.next) return this.next.handle(req);
   }
 }
 
 class RegisterManagerValidationHandler extends BaseHandler {
-  async handle(req: {
-    userName: string;
-    email: string;
-    password: string;
-    phoneNumber: string;
-  }) {
+  async handle(req: ManagerCredentials) {
     if (!req.userName || !req.email || !req.password || !req.phoneNumber) {
       throw new ValidationError('All fields are required');
     }
@@ -48,16 +51,12 @@ class RegisterManagerValidationHandler extends BaseHandler {
 }
 
 class RegisterManagerBackendHandler extends BaseHandler {
-  async handle(req: {
-    userName: string;
-    email: string;
-    password: string;
-    phoneNumber: string;
-  }) {
+  async handle(req: ManagerCredentials) {
     const token = (await cookies()).get('token')?.value;
     if (!token) throw new UnauthorizedError();
 
     const formData = new FormData();
+
     formData.append('userName', req.userName);
     formData.append('email', req.email);
     formData.append('password', req.password);

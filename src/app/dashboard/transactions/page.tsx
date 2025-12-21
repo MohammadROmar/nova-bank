@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 
-import { ApiClient } from '@/core/api/api-client';
 import PageTitle from '@/features/dashboard/components/page-title';
 import TransactionsFilters from '@/features/transactions/components/filters';
 import TransactionCard from '@/features/transactions/components/transaction-card';
 import Pagination from '@/features/dashboard/components/pagination';
+import { ApiClient } from '@/core/api/api-client';
 import type { Transaction } from '@/features/transactions/models/transaction';
 import type { Filters } from '@/features/transactions/models/filters';
 
