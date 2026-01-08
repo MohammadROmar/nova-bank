@@ -1,10 +1,12 @@
 'use client';
 
+import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { useDialog } from '@/shared/hooks/use-dialog';
+import Input from '@/shared/components/input';
 import Button from '@/shared/components/button';
 import Modal from '@/shared/components/modal';
 import FiltersIcon from '@/assets/icons/filters';
@@ -14,8 +16,6 @@ import {
   TransactionStatusSelector,
 } from './selectors';
 import { handleFilters } from '../utils/handle-filters';
-import Input from '@/shared/components/input';
-import Link from 'next/link';
 
 const AccountSelector = dynamic(() => import('./account-selector'), {
   ssr: false,

@@ -40,7 +40,7 @@ function UpdateAccountForm({ account, parentAccount }: Props) {
       <div className="space-y-1">
         <h3 className="text-lg font-medium">Account Information</h3>
         <p className="text-sm font-medium">
-          <span className="text-yellow-500">Note: </span>Leave fields as is to
+          <span className="text-yellow-500">Note: </span>Leave field as is to
           keep its value.
         </p>
       </div>

@@ -60,5 +60,5 @@ export async function loginAction(
     return { success: false, error, email, password };
   }
 
-  redirect('/dashboard');
+  redirect('/dashboard/accounts');
 }

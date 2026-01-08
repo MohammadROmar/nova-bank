@@ -7,7 +7,6 @@ import { User } from '@/features/auth/models/user';
 
 export function getSidebarTabs(role: User['role']) {
   const dashboardTabs = [
-    { label: 'Dashboard', href: '/dashboard', icon: dashboard },
     { label: 'Accounts', href: '/dashboard/accounts', icon: wallet },
     {
       label: 'Create Account',

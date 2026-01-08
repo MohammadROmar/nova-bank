@@ -24,8 +24,11 @@ export default function Breadcrumbs() {
               {segment.replace('-', ' ')}
             </Link>
             {!isLast && (
-              <span aria-hidden className="px-3 sm:px-4">
-                /
+              <span
+                aria-hidden
+                className="pointer-events-none px-3 select-none sm:px-4"
+              >
+                {'>'}
               </span>
             )}
           </li>

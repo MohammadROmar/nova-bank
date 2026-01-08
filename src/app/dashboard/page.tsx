@@ -1,15 +1,11 @@
 import { Metadata } from 'next';
 
-import PageTitle from '@/features/dashboard/components/page-title';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = { title: 'Dashboard' };
 
 function DashboardPage() {
-  return (
-    <section>
-      <PageTitle title="Dashboard" />
-    </section>
-  );
+  redirect('/dashboard/accounts');
 }
 
 export default DashboardPage;
